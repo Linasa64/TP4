@@ -1,0 +1,31 @@
+Pour les heures et nbOccurences, faire un tableau de 24 cases avec l'indice qui est l'heure, et la valeur le nbreOccurences
+Pour les cibles et le SDCréneaux, faire 
+
+Recherche = op la + fréquente.
+
+Toujours optimiser nos tructures de données
+
+c'est des tests bidon dans le dossier tests tel que donné sur moodle
+run et description obligatoires
+run on indique la commande
+
+std.out c'est au car près ce qu'on est censés obtenir en sortie
+le .dot attendu on le fout dans ke *.outfile
+
+le std.in on n'en a pas besoindans ce tp
+
+toujours le top 10, c'est pas parce qu'on met le -g qu'on a pas le top 10
+--> les options c'est en plusieurs
+
+ne pas utiliser le gros fichier de log, mais le couper en morceaux pour pouvoir prévoir le résultat attendu si on lance le programme dessus
+
+le log n'a pas de problèmes, mais certains logs sont très spécifiques, faut faire attention à eux.
+
+sur le gros fichier le log, la génération du .dit avec le top 10 peut dure PLUSIEURS MINUTES !!!!
+
+On utilise tout ce qu'on veut de la STL
+
+-e appliquée avant le top10 et avant la génération --> on n'aura pas de noeud là dessus
+
+
+Pas de statistiques sur les types de requêtes à faire
