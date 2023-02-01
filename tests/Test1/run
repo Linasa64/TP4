@@ -1,1 +1,2 @@
-cat fichier.txt >sortie.txt
+cat fichier.txt > sortie.txt
+./../analog nomFic.log

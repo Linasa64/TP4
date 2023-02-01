@@ -29,3 +29,8 @@ On utilise tout ce qu'on veut de la STL
 
 
 Pas de statistiques sur les types de requêtes à faire
+
+
+l'url de base est une info connue au moment de l'exécution du programme, pour permettre la réutilisabilité du code 
+--> on peut le mettre dans un fichier config, en argument supplémentaire du main, en le demandant à l'utilisateur
+--> dans tous les cas le spécifier dans le manuel d'utilisation
