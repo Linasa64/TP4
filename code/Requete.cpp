@@ -29,8 +29,32 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+const void Requete::printRequete() const{
+    cout << "IP : " << ip << endl;
+    cout << "logName : " << logName << endl;
+    cout << "authenticatedUser : " << authenticatedUser << endl;
+    cout << "date : " << date << endl;
+    cout << "heure : " << heure << endl;
+    cout << "fuseau : " << fuseau << endl;
+    cout << "type : " << type << endl;
+    cout << "cible : " << cible << endl;
+    cout << "versionHTTP : " << versionHTTP << endl;
+    cout << "codeHTTP : " << codeHTTP << endl;
+    cout << "qtDonnees : " << qtDonnees << endl;
+    cout << "ref : " << ref << endl;
+    cout << "client : " << client << endl;
+}
+
 const string Requete::GetIp() const{
     return ip;
+}
+
+const string Requete::GetLogName() const{
+    return logName;
+}
+
+const string Requete::GetAuthenticatedUser() const {
+    return authenticatedUser;
 }
 
 const string Requete::GetDate() const{
@@ -41,8 +65,20 @@ const string Requete::GetHeure() const{
     return heure;
 }
 
+const string Requete::GetFuseau() const {
+    return fuseau;
+}
+
+const string Requete::GetType() const {
+    return type;
+}
+
 const string Requete::GetCible() const{
     return cible;
+}
+
+const string Requete::GetVersionHTTP() const{
+    return versionHTTP;
 }
 
 const string Requete::GetCodeHTTP() const{
@@ -61,18 +97,19 @@ const string Requete::GetClient() const{
     return client;
 }
 
-const string Requete::GetLogName() const{
-    return logName;
-}
-
-const string Requete::GetAuthenticatedUser() const{
-    return authenticatedUser;
-}
 
 
 
 void Requete::SetIp(string chaine){
     ip = chaine;
+}
+
+void Requete::SetLogName(string chaine){
+    logName = chaine;
+}
+
+void Requete::SetAuthenticatedUser(string chaine){
+    authenticatedUser = chaine;
 }
 
 void Requete::SetDate(string chaine){
@@ -83,8 +120,20 @@ void Requete::SetHeure(string chaine){
     heure = chaine;
 }
 
+void Requete::SetFuseau(string chaine){
+    fuseau = chaine;
+}
+
+void Requete::SetType(string chaine){
+    type = chaine;
+}
+
 void Requete::SetCible(string chaine){
     cible = chaine;
+}
+
+void Requete::SetVersionHTTP(string chaine){
+    versionHTTP = chaine;
 }
 
 void Requete::SetCodeHTTP(string chaine){
@@ -101,14 +150,6 @@ void Requete::SetRef(string chaine){
 
 void Requete::SetClient(string chaine){
     client = chaine;
-}
-
-void Requete::SetLogName(string chaine){
-    logName = chaine;
-}
-
-void Requete::SetAuthenticatedUser(string chaine){
-    authenticatedUser = chaine;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -134,9 +175,14 @@ Requete::Requete ( )
 #endif
 
     ip = "";
+    logName = "";
+    authenticatedUser = "";
     date = "";
     heure = "";
+    fuseau = "";
+    type = "";
     cible = "";
+    versionHTTP = "";
     codeHTTP = "";
     qtDonnees = "";
     ref = "";

@@ -36,27 +36,36 @@ public:
     //
     // Contrat :
     //
+
+    const void printRequete() const;
+
     const string GetIp() const;
+    const string GetLogName() const;
+    const string GetAuthenticatedUser() const;
+    const string GetFuseau() const;
+    const string GetType() const;
     const string GetDate() const;
     const string GetHeure() const;
     const string GetCible() const;
+    const string GetVersionHTTP() const;
     const string GetCodeHTTP() const;
     const string GetQtDonnees() const;
     const string GetRef() const;
     const string GetClient() const;
-    const string GetLogName() const;
-    const string GetAuthenticatedUser() const;
 
     void SetIp(string chaine);
+    void SetLogName(string chaine);
+    void SetAuthenticatedUser(string chaine);
+    void SetFuseau(string chaine);
+    void SetType(string chaine);
     void SetDate(string chaine);
     void SetHeure(string chaine);
     void SetCible(string chaine);
+    void SetVersionHTTP(string chaine);
     void SetCodeHTTP(string chaine);
     void SetQtDonnees(string chaine);
     void SetRef(string chaine);
     void SetClient(string chaine);
-    void SetLogName(string chaine);
-    void SetAuthenticatedUser(string chaine);
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -97,7 +106,10 @@ protected:
     string authenticatedUser;
     string date;
     string heure;
+    string fuseau;
+    string type;
     string cible;
+    string versionHTTP;
     string codeHTTP;
     string qtDonnees;
     string ref;
@@ -109,4 +121,3 @@ protected:
 //-------------------------------- Autres définitions dépendantes de <Requete>
 
 #endif // REQUETE_H
-

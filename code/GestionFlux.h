@@ -16,6 +16,7 @@ using namespace std;
 #include <string>
 #include <iostream>
 #include <forward_list>
+#include <fstream>
 #include "Requete.h"
 
 //------------------------------------------------------------- Constantes
@@ -40,6 +41,7 @@ public:
     // Contrat :
     //
     forward_list<Requete> LectureFichier();
+    const forward_list<Requete> GetFwlistRq() const;
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -68,15 +70,7 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-void LectureIp(string & line);
-void LectureCible(string & line);
-void LectureReferer(string & line);
-void LectureHeure(string & line);
-void LectureCodeHTTP(string & line);
-void LectureExtension(string & line);
-void LectureUser(string & line);
-void LectureLogName(string & line);
-void LectureAutenticatedUser(string & line);
+void LineParsing(string & s);
 
 //----------------------------------------------------- Attributs protégés
 

@@ -44,17 +44,14 @@ forward_list<Requete> GestionFlux::LectureFichier(){
         Requete * rq = new Requete;
         getline(fic, line);
         fwlistRq.push_front(*rq);
-        LectureUser(line);
-        LectureLogName(line);
-        LectureAutenticatedUser(line);
-        LectureCible(line);
-        LectureReferer(line);
-        LectureHeure(line);
-        LectureCodeHTTP(line);
-        LectureExtension(line);
+        LineParsing(line);
     }
 
     return fwlistRq;            
+}
+
+const forward_list<Requete> GestionFlux::GetFwlistRq() const{
+    return fwlistRq;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -78,7 +75,6 @@ GestionFlux::GestionFlux ( string nomFic )
 #ifdef MAP
     cout << "Appel au constructeur de <GestionFlux>" << endl;
 #endif
-    ifstream fic;
     fic.open(nomFic, ios_base::in);
     if((nomFic.substr(nomFic.size() - 3) != "txt") && (nomFic.substr(nomFic.size() - 3) != "log")){
         cerr << "____ EXTENSION INCONNUE ____"  << endl;
@@ -109,49 +105,152 @@ GestionFlux::~GestionFlux ( )
 
 //----------------------------------------------------- Méthodes protégées
 
-void GestionFlux::LectureIp(string & line){
+void GestionFlux::LineParsing(string & s){
     
-    string ip;
-    //Sorte d'array qui va avoir en 0 la string de base, et en dans chaque case suivante les découpes.
-	smatch m;
-    //Regex spéciale adresse IP
+    smatch m;
+
+    // IP
 	regex re("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})(.+)");
-	
-	if(regex_match(line, m, re)){
-        ip = m[1];
-        line = m[2];
+	if(regex_match(s, m, re)){
+        string ip = m[1];
+        fwlistRq.front().SetIp(ip);
+        s= m[2];
     }
     else{
         cout << "IP non trouvee" << endl;
     }
-    fwlistRq.front().SetIp(ip);
-}
 
-void GestionFlux::LectureCible(string & line){
-    string cible;
-    fwlistRq.front().SetCible(cible);
-}
+    //logName
+    regex re2("\\s([^\\s]+)\\s(.+)");
+    if(regex_match(s, m, re2)){
+        string logname = m[1];
+        fwlistRq.front().SetLogName(logname);
+        s= m[2];
+    }
+    else{
+        cout << "logname non trouve" << endl;
+    }
 
-void GestionFlux::LectureReferer(string & line){
-    string ref;
+    //authenticatedUser
+    regex re3("([^\\s]+)\\s(.+)");
+    if(regex_match(s, m, re3)){
+        string authenticatedUser = m[1];
+        fwlistRq.front().SetAuthenticatedUser(authenticatedUser);
+        s= m[2];
+    }
+    else{
+        cout << "authenticatedUser non trouve" << endl;
+    }
 
-    fwlistRq.front().SetRef(ref);
-}
+    //date
+    regex re4("^\\[([^\\:]+)(.+)");
+    if(regex_match(s, m, re4)){
+        string date = m[1];
+        fwlistRq.front().SetDate(date);
+        s= m[2];
+    }
+    else{
+        cout << "date non trouvee" << endl;
+    }
 
-void GestionFlux::LectureHeure(string & line){
-    string heure;
+    //heure
+    regex re5("^:([^\\s]+)(.+)");
+    if(regex_match(s, m, re5)){
+        string heure = m[1];
+        fwlistRq.front().SetHeure(heure);
+        s= m[2];
+    }
+    else{
+        cout << "heure non trouvee" << endl;
+    }
 
-    fwlistRq.front().SetCible(heure);
-}
+    //fuseau
+    regex re6("\\s\\+([^\\s]+)\\](.+)");
+    if(regex_match(s, m, re6)){
+        string fuseau = m[1];
+        fwlistRq.front().SetFuseau(fuseau);
+        s= m[2];
+    }
+    else{
+        cout << "fuseau non trouve" << endl;
+    }
 
-void GestionFlux::LectureCodeHTTP(string & line){
-    string code;
+    //type
+    regex re7("\\s([^\\s]+)(.+)");
+    if(regex_match(s, m, re7)){
+        string type = m[1];
+        type.erase(0,1);
+        fwlistRq.front().SetType(type);
+        s= m[2];
+    }
+    else{
+        cout << "type non trouve" << endl;
+    }
+    
+    //cible
+    regex re8("\\s([^\\s]+)(.+)");
+    if(regex_match(s, m, re8)){
+        string cible = m[1];
+        fwlistRq.front().SetCible(cible);
+        s= m[2];
+    }
+    else{
+        cout << "cible non trouvee" << endl;
+    }
 
-    fwlistRq.front().SetCible(code);
-}
+    //Version HTTP
+    regex re9("\\s([^\\s]+)(.+)");
+    if(regex_match(s, m, re9)){
+        string version = m[1];
+        fwlistRq.front().SetVersionHTTP(version);
+        s= m[2];
+    }
+    else{
+        cout << "version http non trouvee" << endl;
+    }
 
-void GestionFlux::LectureExtension(string & line){
-    string ext;
+    //code http
+    regex re10("\\s([^\\s]+)(.+)");
+    if(regex_match(s, m, re10)){
+        string code = m[1];
+        fwlistRq.front().SetCodeHTTP(code);
+        s= m[2];
+    }
+    else{
+        cout << "code http non trouve" << endl;
+    }
 
-    fwlistRq.setExtension(ext);
+    //taille octet réponse
+    regex re11("\\s([^\\s]+)(.+)");
+    if(regex_match(s, m, re11)){
+        string qtData = m[1];
+        fwlistRq.front().SetQtDonnees(qtData);
+        s= m[2];
+    }
+    else{
+        cout << "qt donnees http non trouvee" << endl;
+    }
+
+    //referer
+    regex re12("\\s\"([^\\s\"]+)(.+)");
+    if(regex_match(s, m, re12)){
+        string ref = m[1];
+        fwlistRq.front().SetRef(ref);
+        s= m[2];
+        s.erase(0,1);
+    }
+    else{
+        cout << "ref non trouve" << endl;
+    }
+
+    //id client navigateur
+    regex re13("\\s\"([^\"]+)(.+)");
+    if(regex_match(s, m, re13)){
+        string client = m[1];
+        fwlistRq.front().SetClient(client);
+        s= m[2];
+    }
+    else{
+        cout << "client non trouve" << endl;
+    }
 }
