@@ -15,7 +15,7 @@
 using namespace std;
 #include <string>
 #include <iostream>
-#include <forward_list>
+#include <list>
 #include <fstream>
 #include "Requete.h"
 
@@ -40,8 +40,8 @@ public:
     //
     // Contrat :
     //
-    forward_list<Requete> LectureFichier();
-    const forward_list<Requete> GetFwlistRq() const;
+    list<Requete *> LectureFichier();
+    const list<Requete *> GetlistRq() const;
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -70,11 +70,10 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-void LineParsing(string & s);
 
 //----------------------------------------------------- Attributs protégés
 
-forward_list<Requete> fwlistRq;
+list<Requete *> listRq;
 ifstream fic;
 
 };

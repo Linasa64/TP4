@@ -1,8 +1,8 @@
 #include "Requete.h"
 #include "GestionFlux.h"
 #include <iostream>
-#include <regex>
 #include <fstream>
+#include <list>
 
 using namespace std;
 
@@ -24,15 +24,10 @@ int main(int argc, char const *argv[])
       }
    */
 
-    GestionFlux* gf =  new GestionFlux("../ressources/anonyme.log");
-    gf->LectureFichier();
-    forward_list<Requete> histo = gf->GetFwlistRq();
-
-    for(Requete r : histo){
-        r.printRequete();
-    }
-
-
+    GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
+    const list<Requete *> l = gf->GetlistRq();
+    l.back()->printRequete();
+    cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
 
 }
 

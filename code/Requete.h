@@ -14,6 +14,7 @@
 
 using namespace std;
 #include <string>
+#include <regex>
 
 //------------------------------------------------------------- Constantes
 
@@ -53,7 +54,7 @@ public:
     const string GetRef() const;
     const string GetClient() const;
 
-    void SetIp(string chaine);
+    void SetIp(string &chaine);
     void SetLogName(string chaine);
     void SetAuthenticatedUser(string chaine);
     void SetFuseau(string chaine);
@@ -83,7 +84,7 @@ public:
     // Contrat :
     //
 
-    Requete ( );
+    Requete ( string & str );
     // Mode d'emploi :
     //
     // Contrat :
