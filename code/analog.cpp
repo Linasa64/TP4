@@ -24,10 +24,30 @@ int main(int argc, char const *argv[])
       }
    */
 
-    GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
+    GestionFlux* gf =  new GestionFlux("../ressources/anonyme.log");
     const list<Requete *> l = gf->GetlistRq();
-    l.front()->printRequete();
-    cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
+    //l.front()->printRequete();
+    //cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
+    
+
+    map<string, int> m;
+
+    for(Requete * r : l){
+        if (m.find(r->GetCible()) == m.end()){
+            m.insert({r->GetCible(), 1});
+        }
+        else {
+            m[r->GetCible()] += 1;
+        }
+    }
+
+    
+
+    for (auto itr = m.begin(); itr != m.end(); ++itr) {
+        cout << itr->first<< " (" << itr->second << " hits)" << endl;
+    }
+
+
 }
 
 
