@@ -26,9 +26,8 @@ int main(int argc, char const *argv[])
 
     GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
     const list<Requete *> l = gf->GetlistRq();
-    l.back()->printRequete();
+    l.front()->printRequete();
     cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
-
 }
 
 

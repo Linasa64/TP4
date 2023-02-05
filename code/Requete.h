@@ -84,7 +84,7 @@ public:
     // Contrat :
     //
 
-    Requete ( string & str );
+    Requete ( string str );
     // Mode d'emploi :
     //
     // Contrat :

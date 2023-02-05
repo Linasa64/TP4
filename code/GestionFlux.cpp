@@ -40,7 +40,8 @@ list<Requete *> GestionFlux::LectureFichier(){
 
     while(getline(fic, line))
     {
-        Requete * rq = new Requete(line);
+        string l = line;
+        Requete * rq = new Requete(l);
         listRq.push_back(rq);
     }
     //listRq.back().printRequete();

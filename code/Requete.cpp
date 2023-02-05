@@ -167,19 +167,23 @@ Requete::Requete ( const Requete & unRequete )
 } //----- Fin de Requete (constructeur de copie)
 
 
-Requete::Requete (string & str)
+Requete::Requete (string s)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <Requete>" << endl;
 #endif
-
-    string s = str;
     smatch m;
 
+    //si retour chariot alors ça ne marche plus ???????
+    //solution : le faire sauter !
+    if(int(s.at(s.length() - 1)) == 13){
+        s.pop_back();
+    }    
+
     // IP
-	regex re("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})(.+)");
+	regex re("([^\\s]+)(.+)");
 	if(regex_match(s, m, re)){
         string ip = m[1];
         this->ip = ip;
