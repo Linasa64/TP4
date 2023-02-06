@@ -5,6 +5,7 @@
 #include <list>
 
 using namespace std;
+void Historique();
 
 int main(int argc, char const *argv[])
 {
@@ -23,7 +24,11 @@ int main(int argc, char const *argv[])
          } 
       }
    */
+   Historique();
 
+}
+
+void Historique(){
     GestionFlux* gf =  new GestionFlux("../ressources/anonyme.log");
     const list<Requete *> l = gf->GetlistRq();
     //l.front()->printRequete();
@@ -41,13 +46,9 @@ int main(int argc, char const *argv[])
         }
     }
 
-    
-
     for (auto itr = m.begin(); itr != m.end(); ++itr) {
         cout << itr->first<< " (" << itr->second << " hits)" << endl;
     }
-
-
 }
 
 
