@@ -98,7 +98,9 @@ const string Requete::GetClient() const{
 }
 
 
-
+/* -------------------------- */
+/*           Seteur           */
+/* -------------------------- */
 
 void Requete::SetIp(string &chaine){
     string tip = chaine;
@@ -269,10 +271,11 @@ Requete::Requete (string s)
     }
     else{
         cout << "cible non trouvee" << endl;
+                cout << s << endl;
     }
 
     //Version HTTP
-    regex re9("\\s([^\\s]+)(.+)");
+    regex re9("\\s{1,2}([^\\s]+)(.+)");
     if(regex_match(s, m, re9)){
         string version = m[1];
         this->versionHTTP = version;
@@ -314,6 +317,7 @@ Requete::Requete (string s)
     }
     else{
         cout << "ref non trouve" << endl;
+
     }
 
     //id client navigateur

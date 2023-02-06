@@ -4178,11 +4178,6 @@
 4178
 4179
 4180
-version http non trouvee
-code http non trouve
-qt donnees http non trouvee
-ref non trouve
-client non trouve
 4181
 4182
 4183
@@ -4315,18 +4310,8 @@ client non trouve
 4310
 4311
 4312
-version http non trouvee
-code http non trouve
-qt donnees http non trouvee
-ref non trouve
-client non trouve
 4313
 4314
-version http non trouvee
-code http non trouve
-qt donnees http non trouvee
-ref non trouve
-client non trouve
 4315
 4316
 4317
@@ -4354,11 +4339,6 @@ client non trouve
 4339
 4340
 4341
-version http non trouvee
-code http non trouve
-qt donnees http non trouvee
-ref non trouve
-client non trouve
 4342
 4343
 4344
@@ -4377,11 +4357,6 @@ client non trouve
 4357
 4358
 4359
-version http non trouvee
-code http non trouve
-qt donnees http non trouvee
-ref non trouve
-client non trouve
 4360
 4361
 4362
