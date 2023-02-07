@@ -43,7 +43,7 @@ list<Requete *> GestionFlux::LectureFichier(){
         string l = line;
         Requete * rq = new Requete(l);
         listRq.push_back(rq);
-        cout << listRq.size() << endl;
+        //cout << listRq.size() << endl;
     }
     //listRq.back().printRequete();
     return listRq;            

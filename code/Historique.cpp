@@ -16,6 +16,7 @@ using namespace std;
 
 //------------------------------------------------------ Include personnel
 #include "Historique.h"
+#include "GestionFlux.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -55,6 +56,27 @@ Historique::Historique ( )
 #ifdef MAP
     cout << "Appel au constructeur de <Historique>" << endl;
 #endif
+
+GestionFlux* gf =  new GestionFlux("../ressources/lignes_interessantes.log");
+    const list<Requete *> l = gf->GetlistRq();
+    //l.front()->printRequete();
+    //cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
+    map<string, int> mapHistoNonTriee;
+
+    for(Requete * r : l){
+        if (mapHistoNonTriee.find(r->GetCible()) == mapHistoNonTriee.end()){
+            mapHistoNonTriee.insert({r->GetCible(), 1});
+        }
+        else {
+            mapHistoNonTriee[r->GetCible()] += 1;
+        }
+    }
+
+    for (auto itr = mapHistoNonTriee.begin(); itr != mapHistoNonTriee.end(); ++itr) {
+        mapHisto.emplace(itr->second, itr->first);
+    }
+
+
 } //----- Fin de Historique
 
 
