@@ -16,6 +16,7 @@ using namespace std;
 #include <fstream>
 #include <regex>
 #include <cstdlib>
+#include <list>
 
 //------------------------------------------------------ Include personnel
 #include "GestionFlux.h"
@@ -25,36 +26,31 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type GestionFlux::Méthode ( forward_liste des paramètres )
+// type GestionFlux::Méthode ( liste des paramètres )
 // Algorithme :
 //
 //{
 //} //----- Fin de Méthode
 
 
-forward_list<Requete> GestionFlux::LectureFichier(){
-
-    forward_list<Requete> reqforward_list;
+list<Requete *> GestionFlux::LectureFichier(){
     
 // Lecture du fichier
     string line;
 
-    while(!fic.eof())
+    while(getline(fic, line))
     {
-        Requete * rq = new Requete;
-        getline(fic, line);
-        fwlistRq.push_front(*rq);
-        LectureUser(line);
-        LectureLogName(line);
-        LectureAutenticatedUser(line);
-        LectureCible(line);
-        LectureReferer(line);
-        LectureHeure(line);
-        LectureCodeHTTP(line);
-        LectureExtension(line);
+        string l = line;
+        Requete * rq = new Requete(l);
+        listRq.push_back(rq);
+        //cout << listRq.size() << endl;
     }
+    //listRq.back().printRequete();
+    return listRq;            
+}
 
-    return fwlistRq;            
+const list<Requete *> GestionFlux::GetlistRq() const{
+    return listRq;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -78,8 +74,6 @@ GestionFlux::GestionFlux ( string nomFic )
 #ifdef MAP
     cout << "Appel au constructeur de <GestionFlux>" << endl;
 #endif
-    ifstream fic;
-    fic.open(nomFic, ios_base::in);
     if((nomFic.substr(nomFic.size() - 3) != "txt") && (nomFic.substr(nomFic.size() - 3) != "log")){
         cerr << "____ EXTENSION INCONNUE ____"  << endl;
         exit (EXIT_FAILURE);
@@ -89,8 +83,10 @@ GestionFlux::GestionFlux ( string nomFic )
         exit (EXIT_FAILURE);
     } 
     
-    ifstream fic;
     fic.open(nomFic, ios_base::in);
+    
+    LectureFichier();
+    //listRq.back().printRequete();
 } //----- Fin de GestionFlux
 
 
@@ -108,50 +104,3 @@ GestionFlux::~GestionFlux ( )
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-
-void GestionFlux::LectureIp(string & line){
-    
-    string ip;
-    //Sorte d'array qui va avoir en 0 la string de base, et en dans chaque case suivante les découpes.
-	smatch m;
-    //Regex spéciale adresse IP
-	regex re("([0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3})(.+)");
-	
-	if(regex_match(line, m, re)){
-        ip = m[1];
-        line = m[2];
-    }
-    else{
-        cout << "IP non trouvee" << endl;
-    }
-    fwlistRq.front().SetIp(ip);
-}
-
-void GestionFlux::LectureCible(string & line){
-    string cible;
-    fwlistRq.front().SetCible(cible);
-}
-
-void GestionFlux::LectureReferer(string & line){
-    string ref;
-
-    fwlistRq.front().SetRef(ref);
-}
-
-void GestionFlux::LectureHeure(string & line){
-    string heure;
-
-    fwlistRq.front().SetCible(heure);
-}
-
-void GestionFlux::LectureCodeHTTP(string & line){
-    string code;
-
-    fwlistRq.front().SetCible(code);
-}
-
-void GestionFlux::LectureExtension(string & line){
-    string ext;
-
-    fwlistRq.setExtension(ext);
-}

@@ -1,3 +1,7 @@
+_________________________________________________________
+--------------- 1e prise de note ------------------------
+_________________________________________________________
+
 Pour les heures et nbOccurences, faire un tableau de 24 cases avec l'indice qui est l'heure, et la valeur le nbreOccurences
 Pour les cibles et le SDCréneaux, faire 
 
@@ -34,3 +38,43 @@ Pas de statistiques sur les types de requêtes à faire
 l'url de base est une info connue au moment de l'exécution du programme, pour permettre la réutilisabilité du code 
 --> on peut le mettre dans un fichier config, en argument supplémentaire du main, en le demandant à l'utilisateur
 --> dans tous les cas le spécifier dans le manuel d'utilisation
+
+_________________________________________________________
+--------------- 2e prise de note ------------------------
+_________________________________________________________
+
+On peut avoir des URL referer et cible et d'autres que cible
+
+Test fonctionnel pour chaque situation -> Tableau avec test numero, un nom, une description de ce qu'il fait, la commande
+lancée pour réaliser le test et le nom du fichier qui le fait et ensuite le résultat attendu
+Cas normaux et inhabituels
+Framework => Chaque test est un repertoire et la procedure est automatisée
+
+Quelles classes et quelles structures de données ?
+Tout est utilisable, juste que stl 
+
+Conception du programme :
+Fichier volumineux en entrée
+Avoir un composant réutilisable par les autres capable de gérer le fichier .log + fournir les infos qui sont dedans
+Composant indépendant, il doit juste envoyer le prochain log
+Autre composant envoi des stats : réfléchir à quelle stl on prend. Il a besoin du nombre de hits (à calculer car pas écrit)
+et représente le graphe
+
+	cible, ref
+Flurx -------------> Stats
+
+Hits par heure faire un tableau car nb heure connu
+Opération la plus faite est la recherche en O(n)
+
+Programme à mettre dans le framework de test
+Chaque sous répertoire test représente un test fonctionnel
+On peut mettre 'lexecutable dans bin pour ne pas avoir a le mettre partout
+Que run et description sont obligatoire, puis faut choisir l'un de ceux en dessous
+
+la condition (-e ou -g) se fait avant la creation du top 10
+enlever les paramètres des url
+
+Il faut travailler sur des bouts de .log pour pouvoir prévoir le résultat
+! Certains log on des specifités
+-> Ne pas utiliser nos tests directement sur le gros.log et pour le .dot plusieurs minutes à créer donc faire sur 
+des plus petits fichiers

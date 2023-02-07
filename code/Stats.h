@@ -1,35 +1,28 @@
 /*************************************************************************
-                           GestionFlux  -  description
+                           Stats  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <GestionFlux> (fichier GestionFlux.h) ----------------
-#if ! defined ( GESTIONFLUX_H )
-#define GESTIONFLUX_H
+//---------- Interface de la classe <Stats> (fichier Stats.h) ----------------
+#if ! defined ( STATS_H )
+#define STATS_H
 
 //--------------------------------------------------- Interfaces utilisées
-
-using namespace std;
-#include <string>
-#include <iostream>
-#include <list>
-#include <fstream>
-#include "Requete.h"
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <GestionFlux>
+// Rôle de la classe <Stats>
 //
 //
 //------------------------------------------------------------------------
 
-class GestionFlux
+class Stats : public Ancetre
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -40,26 +33,30 @@ public:
     //
     // Contrat :
     //
-    list<Requete *> LectureFichier();
-    const list<Requete *> GetlistRq() const;
+
 
 //------------------------------------------------- Surcharge d'opérateurs
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    GestionFlux ( const GestionFlux & unGestionFlux );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    GestionFlux ( string nomFic );
+    Stats & operator = ( const Stats & unStats );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~GestionFlux ( );
+
+//-------------------------------------------- Constructeurs - destructeur
+    Stats ( const Stats & unStats );
+    // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
+
+    Stats ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    virtual ~Stats ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -70,15 +67,11 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-
 //----------------------------------------------------- Attributs protégés
-
-list<Requete *> listRq;
-ifstream fic;
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <GestionFlux>
+//-------------------------------- Autres définitions dépendantes de <Stats>
 
-#endif // GESTIONFLUX_H
+#endif // STATS_H
 

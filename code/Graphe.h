@@ -1,35 +1,28 @@
 /*************************************************************************
-                           GestionFlux  -  description
+                           Graphe  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <GestionFlux> (fichier GestionFlux.h) ----------------
-#if ! defined ( GESTIONFLUX_H )
-#define GESTIONFLUX_H
+//---------- Interface de la classe <Graphe> (fichier Graphe.h) ----------------
+#if ! defined ( Graphe_H )
+#define Graphe_H
 
 //--------------------------------------------------- Interfaces utilisées
-
-using namespace std;
-#include <string>
-#include <iostream>
-#include <list>
-#include <fstream>
-#include "Requete.h"
 
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <GestionFlux>
+// Rôle de la classe <Graphe>
 //
 //
 //------------------------------------------------------------------------
 
-class GestionFlux
+class Graphe
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -40,26 +33,30 @@ public:
     //
     // Contrat :
     //
-    list<Requete *> LectureFichier();
-    const list<Requete *> GetlistRq() const;
+
 
 //------------------------------------------------- Surcharge d'opérateurs
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    GestionFlux ( const GestionFlux & unGestionFlux );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
-    GestionFlux ( string nomFic );
+    Graphe & operator = ( const Graphe & unGraphe );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~GestionFlux ( );
+
+//-------------------------------------------- Constructeurs - destructeur
+    Graphe ( const Graphe & unGraphe );
+    // Mode d'emploi (constructeur de copie) :
+    //
+    // Contrat :
+    //
+
+    Graphe ( );
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
+    virtual ~Graphe ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -70,15 +67,11 @@ public:
 protected:
 //----------------------------------------------------- Méthodes protégées
 
-
 //----------------------------------------------------- Attributs protégés
-
-list<Requete *> listRq;
-ifstream fic;
 
 };
 
-//-------------------------------- Autres définitions dépendantes de <GestionFlux>
+//-------------------------------- Autres définitions dépendantes de <Graphe>
 
-#endif // GESTIONFLUX_H
+#endif // Graphe_H
 
