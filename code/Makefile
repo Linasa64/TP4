@@ -1,5 +1,5 @@
 EXE = analog
-OBJETS = analog.o Requete.o GestionFlux.o Historique.cpp
+OBJETS = analog.o Requete.o GestionFlux.o Historique.o
 FLAGS = -c -ansi -pedantic -std=c++11 -Wall # pour débug -c -DMAP -std=c++11 -ansi -Wall -pedantic
 
 $(EXE): $(OBJETS)

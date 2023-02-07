@@ -29,26 +29,25 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 void Historique::Top10(){
-    for (auto itr = mapHisto.begin(); itr != mapHisto.end(); ++itr) {
-        mpTop10.insert(pair<int, string>(itr->second, itr->first));
+    for (auto itr = mapComplete.begin(); itr != mapComplete.end(); ++itr) {
+        mpTop10.insert(pair<int, string>(itr->second.first, itr->first));
     }
-   int cpt = 0;
-   for (auto itr = mpTop10.rbegin(); itr != mpTop10.rend(); ++itr) {
-        cout << itr->second<< " (" << itr->first << " hits)" << endl;
+    int cpt = 0;
+    for (auto itr = mpTop10.rbegin(); itr != mpTop10.rend(); ++itr) {
         cpt++;
+        cout << itr->second<< " (" << itr->first << " hits)" << endl;
         if(cpt==10){
-         break;
+            break;
         }
     }
 }
 
+map<string, pair<int, map<string, int>>> Historique::GetMapComplete (){
+    return mapComplete;
+}
+
 
 //------------------------------------------------- Surcharge d'opérateurs
-Historique & Historique::operator = ( const Historique & unHistorique )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -72,19 +71,33 @@ Historique::Historique ( )
 
     GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
     const list<Requete *> l = gf->GetlistRq();
-    //l.front()->printRequete();
-    //cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
 
     for(Requete * r : l){
-        if (mapHisto.find(r->GetCible()) == mapHisto.end()){
-            mapHisto.insert({r->GetCible(), 1});
-        }
-        else {
-            mapHisto[r->GetCible()] += 1;
+        int changed = 0;
+        for (auto itr = mapComplete.begin(); itr != mapComplete.end(); itr++) {
+            if (itr -> first == r->GetCible()){
+                mapComplete[itr->first].first +=1;
+                for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++) {
+                    if(itr2->first == r->GetRef()){
+                        mapComplete[itr->first].second.at(itr2->first) = itr2->second+1;
+                    }
+                    else{
+                        mapComplete[itr->first].second.insert(make_pair(r->GetRef(), 1));
+                    }
+                }
+                changed = 1;
+                break;
+            }
+        }  
+        if(changed ==0){
+            map<string, int> innerMap;
+            innerMap.insert(make_pair(r->GetRef(), 1));
+            pair<int, map<string, int>> innerPair = make_pair(1, innerMap);
+            mapComplete.emplace(make_pair(r->GetCible(), innerPair));
+        }else{
+            changed = 1;
         }
     }
-
-
 } //----- Fin de Historique
 
 

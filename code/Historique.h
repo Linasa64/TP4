@@ -34,6 +34,7 @@ public:
     // Contrat :
     //
     void Top10();
+    map<string, pair<int, map<string, int>>> GetMapComplete ();
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -69,7 +70,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-map<string, int> mapHisto;
+map<string, pair<int, map<string, int>>> mapComplete;
 multimap<int, string> mpTop10;
 
 };
