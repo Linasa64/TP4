@@ -263,16 +263,24 @@ Requete::Requete (string s)
     }
     
     //cible
-    regex re8("\\s([^\\s]+)(.+)");
-    if(regex_match(s, m, re8)){
+    regex re81("\\s(.+)(\\sHTTP.+)");
+    if(regex_match(s, m, re81)){
         string cible = m[1];
+        //cible.erase(0,1);
         this->cible = cible;
         s= m[2];
+    }else{
+        regex re82("\\s([^\\s]+)(.+)");
+        if(regex_match(s, m, re82)){
+            string cible = m[1];
+            this->cible = cible;
+            s= m[2];
+        }
+        else{
+            cout << "cible non trouvee" << endl;                 
+        }
     }
-    else{
-        cout << "cible non trouvee" << endl;
-                cout << s << endl;
-    }
+
 
     //Version HTTP
     regex re9("\\s{1,2}([^\\s]+)(.+)");

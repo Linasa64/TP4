@@ -29,7 +29,7 @@ int main(int argc, char const *argv[])
 }
 
 void Historique(){
-    GestionFlux* gf =  new GestionFlux("../ressources/lignes_interessantes.log");
+    GestionFlux* gf =  new GestionFlux("../ressources/anonyme.log");
     const list<Requete *> l = gf->GetlistRq();
     //l.front()->printRequete();
     //cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
