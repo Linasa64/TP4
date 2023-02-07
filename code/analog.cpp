@@ -1,14 +1,11 @@
 #include "Requete.h"
 #include "GestionFlux.h"
+#include "Historique.h"
 #include <iostream>
 #include <fstream>
 #include <list>
 
 using namespace std;
-void Historique();
-bool cmp(pair<string, int>& a, pair<string, int>& b);
-vector<pair<string, int> > sort(map<string, int>& m);
-
 
 int main(int argc, char const *argv[])
 {
@@ -27,56 +24,10 @@ int main(int argc, char const *argv[])
          } 
       }
    */
-   Historique();
+   Historique * h = new Historique();
+   h->Top10();
 
 }
-
-void Historique(){
-    GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
-    const list<Requete *> l = gf->GetlistRq();
-    //l.front()->printRequete();
-    //cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
-    
-   vector<pair<string, int> > vec;
-   map<string, int> m;
-
-    for(Requete * r : l){
-        if (m.find(r->GetCible()) == m.end()){
-            m.insert({r->GetCible(), 1});
-        }
-        else {
-            m[r->GetCible()] += 1;
-        }
-    }
-
-
-   vec = sort(m);
-   int cpt=0;
-   for (auto& it : vec) {
-      cout << it.first<< " (" << it.second << " hits)" << endl;
-      cpt++;
-      if(cpt==10){
-         break;
-      }
-   }
-}
-
-bool cmp(pair<string, int>& a, pair<string, int>& b)
-{
-    return a.second > b.second;
-}
-
-vector<pair<string, int> > sort(map<string, int>& m)
-{
-   vector<pair<string, int> > A;
-   for (auto itr = m.begin(); itr != m.end(); ++itr) {
-      pair<string, int> p = {itr->first, itr->second};
-      A.push_back(p);
-   }
-   sort(A.begin(), A.end(), cmp);
-   return A;
-}
-
 
 /*
 

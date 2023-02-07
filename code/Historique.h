@@ -33,6 +33,7 @@ public:
     //
     // Contrat :
     //
+    void Top10();
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -44,7 +45,7 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    Historique ( const Historique & unHistorique );
+    // Historique ( const Historique & unHistorique );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
@@ -69,6 +70,8 @@ protected:
 
 //----------------------------------------------------- Attributs protégés
 map<string, int> mapHisto;
+multimap<int, string> mpTop10;
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <Historique>

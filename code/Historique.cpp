@@ -13,7 +13,7 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
-
+#include <map>
 //------------------------------------------------------ Include personnel
 #include "Historique.h"
 #include "GestionFlux.h"
@@ -28,6 +28,19 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+void Historique::Top10(){
+    for (auto itr = mapHisto.begin(); itr != mapHisto.end(); ++itr) {
+        mpTop10.insert(pair<int, string>(itr->second, itr->first));
+    }
+   int cpt = 0;
+   for (auto itr = mpTop10.rbegin(); itr != mpTop10.rend(); ++itr) {
+        cout << itr->second<< " (" << itr->first << " hits)" << endl;
+        cpt++;
+        if(cpt==10){
+         break;
+        }
+    }
+}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -39,14 +52,14 @@ Historique & Historique::operator = ( const Historique & unHistorique )
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Historique::Historique ( const Historique & unHistorique )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Historique>" << endl;
-#endif
-} //----- Fin de Historique (constructeur de copie)
+// Historique::Historique ( const Historique & unHistorique )
+// // Algorithme :
+// //
+// {
+// #ifdef MAP
+//     cout << "Appel au constructeur de copie de <Historique>" << endl;
+// #endif
+// } //----- Fin de Historique (constructeur de copie)
 
 
 Historique::Historique ( )
@@ -57,23 +70,18 @@ Historique::Historique ( )
     cout << "Appel au constructeur de <Historique>" << endl;
 #endif
 
-GestionFlux* gf =  new GestionFlux("../ressources/lignes_interessantes.log");
+    GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
     const list<Requete *> l = gf->GetlistRq();
     //l.front()->printRequete();
     //cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
-    map<string, int> mapHistoNonTriee;
 
     for(Requete * r : l){
-        if (mapHistoNonTriee.find(r->GetCible()) == mapHistoNonTriee.end()){
-            mapHistoNonTriee.insert({r->GetCible(), 1});
+        if (mapHisto.find(r->GetCible()) == mapHisto.end()){
+            mapHisto.insert({r->GetCible(), 1});
         }
         else {
-            mapHistoNonTriee[r->GetCible()] += 1;
+            mapHisto[r->GetCible()] += 1;
         }
-    }
-
-    for (auto itr = mapHistoNonTriee.begin(); itr != mapHistoNonTriee.end(); ++itr) {
-        mapHisto.emplace(itr->second, itr->first);
     }
 
 
