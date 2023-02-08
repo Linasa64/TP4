@@ -11,12 +11,14 @@
 //---------------------------------------------------------------- INCLUDE
 #include <iostream>
 #include <fstream>
+#include <map>
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
 
 //------------------------------------------------------ Include personnel
 #include "Graphe.h"
+#include "Historique.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -31,11 +33,6 @@ using namespace std;
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Graphe & Graphe::operator = ( const Graphe & unGraphe )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -49,7 +46,7 @@ Graphe::Graphe ( const Graphe & unGraphe )
 } //----- Fin de Graphe (constructeur de copie)
 
 
-Graphe::Graphe ( )
+Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles)
 // Algorithme :
 //
 {
@@ -57,13 +54,20 @@ Graphe::Graphe ( )
     cout << "Appel au constructeur de <Graphe>" << endl;
 #endif
 
-    ofstream gFile("gFile.dot");
-    gfile << "digraph {" << endl;
+    gFile.open("gFile.dot");
+    gFile << "digraph {" << endl;
 
+    for (auto itr = mapCles.begin(); itr != mapCles.end(); itr++) {
+        gFile << "node" << mapCles[itr->first] << " [label=\"" << itr->first << "\"];" << endl;
+    }
+    for (auto itr = m.begin(); itr != m.end(); itr++) {
+        for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++) {
+            gFile << "node" << mapCles[itr2->first] << " -> node" << mapCles[itr->first] << " [label=\"" << m[itr->first].second.at(itr2->first) << "\"];" << endl; 
+        }
+    }
 
-    gfile << "}";
-
-
+    gFile << "}" << endl;
+    return;
 } //----- Fin de Graphe
 
 

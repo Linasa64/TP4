@@ -35,6 +35,7 @@ public:
     //
     void Top10();
     map<string, pair<int, map<string, int>>> GetMapComplete ();
+    map<string, int> GetMapCles();
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -72,7 +73,7 @@ protected:
 //----------------------------------------------------- Attributs protégés
 map<string, pair<int, map<string, int>>> mapComplete;
 multimap<int, string> mpTop10;
-
+map<string, int> mapCles;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Historique>

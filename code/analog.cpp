@@ -1,9 +1,11 @@
 #include "Requete.h"
 #include "GestionFlux.h"
 #include "Historique.h"
+#include "Graphe.h"
 #include <iostream>
 #include <fstream>
 #include <list>
+#include <map>
 
 using namespace std;
 
@@ -26,7 +28,9 @@ int main(int argc, char const *argv[])
    */
    Historique * h = new Historique();
    h->Top10();
-
+   map<string, pair<int, map<string, int>>> m = h->GetMapComplete();
+   map<string, int> mapCles = h->GetMapCles();
+   Graphe *g = new Graphe(m, mapCles);
 }
 
 /*

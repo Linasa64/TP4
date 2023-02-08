@@ -46,6 +46,10 @@ map<string, pair<int, map<string, int>>> Historique::GetMapComplete (){
     return mapComplete;
 }
 
+map<string, int> Historique::GetMapCles (){
+    return mapCles;
+}
+
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -74,16 +78,25 @@ Historique::Historique ( )
 
     for(Requete * r : l){
         int changed = 0;
+        if(mapCles.find(r->GetCible())==mapCles.end()){
+            mapCles.insert(make_pair(r->GetCible(), mapCles.size()));
+        }
+        if(mapCles.find(r->GetRef())==mapCles.end()){
+            mapCles.insert(make_pair(r->GetRef(), mapCles.size()));
+        }
         for (auto itr = mapComplete.begin(); itr != mapComplete.end(); itr++) {
             if (itr -> first == r->GetCible()){
                 mapComplete[itr->first].first +=1;
+                int innerChange = 0;
                 for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++) {
                     if(itr2->first == r->GetRef()){
                         mapComplete[itr->first].second.at(itr2->first) = itr2->second+1;
+                        innerChange = 1;
+                        break;
                     }
-                    else{
-                        mapComplete[itr->first].second.insert(make_pair(r->GetRef(), 1));
-                    }
+                }
+                if(innerChange==0){
+                    mapComplete[itr->first].second.insert(make_pair(r->GetRef(), 1));
                 }
                 changed = 1;
                 break;

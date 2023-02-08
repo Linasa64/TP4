@@ -50,7 +50,7 @@ public:
     // Contrat :
     //
 
-    Graphe ( );
+    Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles);
     // Mode d'emploi :
     //
     // Contrat :
@@ -68,6 +68,7 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
+ofstream gFile;
 
 };
 
