@@ -33,6 +33,8 @@ int main(int argc, char const *argv[])
    map<string, pair<int, map<string, int>>> m = h->GetMapComplete();
    map<string, int> mapCles = h->GetMapCles();
    Graphe *g = new Graphe(m, mapCles);
+   delete h;
+   delete g;
 }
 
 /*

@@ -67,6 +67,7 @@ Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> ma
     }
 
     gFile << "}" << endl;
+    gFile.close();
     return;
 } //----- Fin de Graphe
 

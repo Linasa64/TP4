@@ -75,7 +75,8 @@ Historique::Historique ( )
 
     GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
     const list<Requete *> l = gf->GetlistRq();
-
+    delete gf;
+    
     for(Requete * r : l){
         int changed = 0;
         if(mapCles.find(r->GetCible())==mapCles.end()){
@@ -111,6 +112,11 @@ Historique::Historique ( )
             changed = 1;
         }
     }
+
+    for(Requete* r : l){
+        delete r;
+    }
+
 } //----- Fin de Historique
 
 
@@ -121,6 +127,10 @@ Historique::~Historique ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Historique>" << endl;
 #endif
+
+
+
+
 } //----- Fin de ~Historique
 
 
