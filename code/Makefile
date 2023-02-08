@@ -13,6 +13,7 @@ GestionFlux.o: GestionFlux.cpp
 
 Historique.o: Historique.cpp
 	g++ $(FLAGS) Historique.cpp
+	
 Graphe.o: Graphe.cpp
 	g++ $(FLAGS) Graphe.cpp
 
