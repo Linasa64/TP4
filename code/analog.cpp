@@ -1,11 +1,13 @@
 #include "Requete.h"
 #include "GestionFlux.h"
+#include "Historique.h"
+#include "Graphe.h"
 #include <iostream>
 #include <fstream>
 #include <list>
+#include <map>
 
 using namespace std;
-void Historique();
 
 int main(int argc, char const *argv[])
 {
@@ -24,33 +26,12 @@ int main(int argc, char const *argv[])
          } 
       }
    */
-   Historique();
-
+   Historique * h = new Historique();
+   h->Top10();
+   map<string, pair<int, map<string, int>>> m = h->GetMapComplete();
+   map<string, int> mapCles = h->GetMapCles();
+   Graphe *g = new Graphe(m, mapCles);
 }
-
-void Historique(){
-    GestionFlux* gf =  new GestionFlux("../ressources/anonyme.log");
-    const list<Requete *> l = gf->GetlistRq();
-    //l.front()->printRequete();
-    //cout << "main : " << gf->GetlistRq().size() << gf->GetlistRq().back()->GetIp() << endl;
-    
-
-    map<string, int> m;
-
-    for(Requete * r : l){
-        if (m.find(r->GetCible()) == m.end()){
-            m.insert({r->GetCible(), 1});
-        }
-        else {
-            m[r->GetCible()] += 1;
-        }
-    }
-
-    for (auto itr = m.begin(); itr != m.end(); ++itr) {
-        cout << itr->first<< " (" << itr->second << " hits)" << endl;
-    }
-}
-
 
 /*
 

@@ -13,9 +13,10 @@
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
-
+#include <map>
 //------------------------------------------------------ Include personnel
 #include "Historique.h"
+#include "GestionFlux.h"
 
 //------------------------------------------------------------- Constantes
 
@@ -27,25 +28,41 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
+void Historique::Top10(){
+    for (auto itr = mapComplete.begin(); itr != mapComplete.end(); ++itr) {
+        mpTop10.insert(pair<int, string>(itr->second.first, itr->first));
+    }
+    int cpt = 0;
+    for (auto itr = mpTop10.rbegin(); itr != mpTop10.rend(); ++itr) {
+        cpt++;
+        cout << itr->second<< " (" << itr->first << " hits)" << endl;
+        if(cpt==10){
+            break;
+        }
+    }
+}
+
+map<string, pair<int, map<string, int>>> Historique::GetMapComplete (){
+    return mapComplete;
+}
+
+map<string, int> Historique::GetMapCles (){
+    return mapCles;
+}
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-Historique & Historique::operator = ( const Historique & unHistorique )
-// Algorithme :
-//
-{
-} //----- Fin de operator =
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Historique::Historique ( const Historique & unHistorique )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Historique>" << endl;
-#endif
-} //----- Fin de Historique (constructeur de copie)
+// Historique::Historique ( const Historique & unHistorique )
+// // Algorithme :
+// //
+// {
+// #ifdef MAP
+//     cout << "Appel au constructeur de copie de <Historique>" << endl;
+// #endif
+// } //----- Fin de Historique (constructeur de copie)
 
 
 Historique::Historique ( )
@@ -55,6 +72,45 @@ Historique::Historique ( )
 #ifdef MAP
     cout << "Appel au constructeur de <Historique>" << endl;
 #endif
+
+    GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
+    const list<Requete *> l = gf->GetlistRq();
+
+    for(Requete * r : l){
+        int changed = 0;
+        if(mapCles.find(r->GetCible())==mapCles.end()){
+            mapCles.insert(make_pair(r->GetCible(), mapCles.size()));
+        }
+        if(mapCles.find(r->GetRef())==mapCles.end()){
+            mapCles.insert(make_pair(r->GetRef(), mapCles.size()));
+        }
+        for (auto itr = mapComplete.begin(); itr != mapComplete.end(); itr++) {
+            if (itr -> first == r->GetCible()){
+                mapComplete[itr->first].first +=1;
+                int innerChange = 0;
+                for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++) {
+                    if(itr2->first == r->GetRef()){
+                        mapComplete[itr->first].second.at(itr2->first) = itr2->second+1;
+                        innerChange = 1;
+                        break;
+                    }
+                }
+                if(innerChange==0){
+                    mapComplete[itr->first].second.insert(make_pair(r->GetRef(), 1));
+                }
+                changed = 1;
+                break;
+            }
+        }  
+        if(changed ==0){
+            map<string, int> innerMap;
+            innerMap.insert(make_pair(r->GetRef(), 1));
+            pair<int, map<string, int>> innerPair = make_pair(1, innerMap);
+            mapComplete.emplace(make_pair(r->GetCible(), innerPair));
+        }else{
+            changed = 1;
+        }
+    }
 } //----- Fin de Historique
 
 

@@ -320,6 +320,14 @@ Requete::Requete (string s)
     if(regex_match(s, m, re12)){
         string ref = m[1];
         this->ref = ref;
+
+        string s = "http://intranet-if.insa-lyon.fr";
+
+        string::size_type i = this->ref.find(s);
+
+        if (i != string::npos)
+        this->ref.erase(i, s.length());
+
         s= m[2];
         s.erase(0,1);
     }

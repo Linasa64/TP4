@@ -1,14 +1,14 @@
 /*************************************************************************
-                           Historique  -  description
+                           Graphe  -  description
                              -------------------
     début                : $DATE$
     copyright            : (C) $YEAR$ par $AUTHOR$
     e-mail               : $EMAIL$
 *************************************************************************/
 
-//---------- Interface de la classe <Historique> (fichier Historique.h) ----------------
-#if ! defined ( HISTORIQUE_H )
-#define HISTORIQUE_H
+//---------- Interface de la classe <Graphe> (fichier Graphe.h) ----------------
+#if ! defined ( Graphe_H )
+#define Graphe_H
 
 //--------------------------------------------------- Interfaces utilisées
 
@@ -17,12 +17,12 @@
 //------------------------------------------------------------------ Types
 
 //------------------------------------------------------------------------
-// Rôle de la classe <Historique>
+// Rôle de la classe <Graphe>
 //
 //
 //------------------------------------------------------------------------
 
-class Historique
+class Graphe
 {
 //----------------------------------------------------------------- PUBLIC
 
@@ -33,13 +33,10 @@ public:
     //
     // Contrat :
     //
-    void Top10();
-    map<string, pair<int, map<string, int>>> GetMapComplete ();
-    map<string, int> GetMapCles();
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Historique & operator = ( const Historique & unHistorique );
+    Graphe & operator = ( const Graphe & unGraphe );
     // Mode d'emploi :
     //
     // Contrat :
@@ -47,19 +44,19 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    // Historique ( const Historique & unHistorique );
+    Graphe ( const Graphe & unGraphe );
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Historique ( );
+    Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Historique ( );
+    virtual ~Graphe ( );
     // Mode d'emploi :
     //
     // Contrat :
@@ -71,12 +68,11 @@ protected:
 //----------------------------------------------------- Méthodes protégées
 
 //----------------------------------------------------- Attributs protégés
-map<string, pair<int, map<string, int>>> mapComplete;
-multimap<int, string> mpTop10;
-map<string, int> mapCles;
+ofstream gFile;
+
 };
 
-//-------------------------------- Autres définitions dépendantes de <Historique>
+//-------------------------------- Autres définitions dépendantes de <Graphe>
 
-#endif // HISTORIQUE_H
+#endif // Graphe_H
 
