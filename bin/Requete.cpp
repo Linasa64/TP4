@@ -73,15 +73,18 @@ const string Requete::GetHeure() const
     return heure;
 } //----- Fin de Méthode
 
-const string Requete::GetMinute() const{
+const string Requete::GetMinute() const
+{
     return heure;
 } //----- Fin de Méthode
 
-const string Requete::GetSeconde() const{
+const string Requete::GetSeconde() const
+{
     return heure;
 } //----- Fin de Méthode
 
-const string Requete::GetFuseau() const {
+const string Requete::GetFuseau() const
+{
     return fuseau;
 } //----- Fin de Méthode
 
@@ -143,7 +146,7 @@ Requete::Requete(string s)
 #endif
     smatch m;
 
-    // faire sauter le retour chariot en fin de ligne pour simplifier l'utilisation des expressions régulières
+    // Suppression du retour chariot en fin de ligne pour simplifier l'utilisation des expressions régulières
     if (int(s.at(s.length() - 1)) == 13)
     {
         s.pop_back();
@@ -157,7 +160,8 @@ Requete::Requete(string s)
         this->ip = ip;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : IP non trouvée" << endl;
         this->ip = "";
     }
@@ -170,19 +174,22 @@ Requete::Requete(string s)
         this->logName = logName;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : logName non trouvé" << endl;
         this->logName = "";
     }
 
     // Extraire authenticatedUser
     regex reAU("([^\\s]+)\\s(.+)");
-    if(regex_match(s, m, reAU)){
+    if (regex_match(s, m, reAU))
+    {
         authenticatedUser = m[1];
         this->authenticatedUser = authenticatedUser;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : authenticatedUser non trouvé" << endl;
         this->authenticatedUser = "";
     }
@@ -195,7 +202,8 @@ Requete::Requete(string s)
         this->date = date;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : date non trouvée" << endl;
         this->date = "";
     }
@@ -203,35 +211,43 @@ Requete::Requete(string s)
     // Extraire heure - minute - seconde
     regex reHeure("([^\\s]+)(.+)");
     regex reIsole("^:([^\\:]+)(.+)");
-    if(regex_match(s, m, reHeure)){
+    if (regex_match(s, m, reHeure))
+    {
         string hms = m[1];
-        s= m[2];
+        s = m[2];
 
         // Extraire Heure
-        if(regex_match(hms, m, reIsole)){
+        if (regex_match(hms, m, reIsole))
+        {
             string heure = m[1];
             hms = m[2];
             this->heure = heure;
-        }else 
+        }
+        else
             this->heure = "";
 
         // Extraire Minute
-        if(regex_match(hms, m, reIsole)){
+        if (regex_match(hms, m, reIsole))
+        {
             string minute = m[1];
             hms = m[2];
             this->minute = minute;
-        }else
+        }
+        else
             this->minute = "";
 
         // Extraire Seconde
         regex reIsoleSeconde("^:([^\\s]+)(.+)");
-        if(regex_match(hms, m, reIsoleSeconde)){
+        if (regex_match(hms, m, reIsoleSeconde))
+        {
             string seconde = m[1];
             this->seconde = seconde;
-        }else   
+        }
+        else
             this->seconde = "";
     }
-    else{
+    else
+    {
         cout << "Warning : horaire non trouvé" << endl;
     }
 
@@ -243,7 +259,8 @@ Requete::Requete(string s)
         this->fuseau = fuseau;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : fuseau non trouvé" << endl;
         this->fuseau = "";
     }
@@ -257,33 +274,34 @@ Requete::Requete(string s)
         this->type = type;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : type non trouvé" << endl;
         this->type = "";
     }
-    
- 
+
     // Extraire Cible
     regex rePHP("(.+\\.php)(.+)");
     regex reICO("(.+\\.ico)(.+)");
-    
-    regex reCibleG("\\s([^\\s]+)(HTTP.+)"); // Cas où il y a 1 espace devant HTTP " HTTP"
+
+    regex reCibleG("\\s([^\\s]+)(HTTP.+)");    // Cas où il y a 1 espace devant HTTP " HTTP"
     regex reCibleEspace("\\s(.+)(\\sHTTP.+)"); // Cas où il y a 2 espaces devant HTTP "  HTTP"
     if (regex_match(s, m, reCibleG) || regex_match(s, m, reCibleEspace))
     {
         string cible = m[1];
         s = m[2];
         // Cas de php et ico qui ne finissent pas par l'extension
-        if (regex_match(cible, m, rePHP) || regex_match(cible, m, reICO)) 
+        if (regex_match(cible, m, rePHP) || regex_match(cible, m, reICO))
         {
             cible = m[1];
         }
 
         this->cible = cible;
-    
-    }else{
+    }
+    else
+    {
         cout << "Warning : cible non trouvée" << endl;
-        this->cible = "";                
+        this->cible = "";
     }
 
     // Extraire Type de la cible
@@ -293,8 +311,9 @@ Requete::Requete(string s)
         string cibleType = m[2];
         this->cibleType = cibleType;
     }
-    else{
-        this->cibleType = "";              
+    else
+    {
+        this->cibleType = "";
     }
 
     // Extraire Version HTTP
@@ -305,9 +324,10 @@ Requete::Requete(string s)
         this->versionHTTP = version;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : version http non trouvée" << endl;
-        this->versionHTTP = "";     
+        this->versionHTTP = "";
     }
 
     // Extraire Code HTTP
@@ -318,9 +338,10 @@ Requete::Requete(string s)
         this->codeHTTP = code;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : code http non trouvé" << endl;
-        this->codeHTTP = "";     
+        this->codeHTTP = "";
     }
 
     // Extraire Taille octet réponse
@@ -331,14 +352,16 @@ Requete::Requete(string s)
         this->qtDonnees = qtData;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : quantité de données http non trouvée" << endl;
-        this->qtDonnees = "";  
+        this->qtDonnees = "";
     }
 
     // Extraire Referer
     regex reRefG("\\s\"([^\"\\s]+)(.+)");
-    if(regex_match(s, m, reRefG)){
+    if (regex_match(s, m, reRefG))
+    {
         string ref = m[1];
         // Cas de php et ico qui ne finissent pas par l'extension
         if (regex_match(ref, m, rePHP) || regex_match(ref, m, reICO))
@@ -347,7 +370,7 @@ Requete::Requete(string s)
         }
         this->ref = ref;
 
-        //string s = "http://intranet-if.insa-lyon.fr";
+        // Utilisation du fichier de configuration
         ifstream config;
         string s;
         config.open("./../ressources/config");
@@ -359,11 +382,13 @@ Requete::Requete(string s)
         if (i != string::npos)
             this->ref.erase(i, s.length());
 
-        s= m[2];
-        s.erase(0,1);
-    }else{
+        s = m[2];
+        s.erase(0, 1);
+    }
+    else
+    {
         cout << "Warning : referer non trouvé" << endl;
-        this->ref = "";  
+        this->ref = "";
     }
 
     // Extraire Type du referer
@@ -373,8 +398,9 @@ Requete::Requete(string s)
         string refType = m[2];
         this->refType = refType;
     }
-    else{
-        this->refType = "";               
+    else
+    {
+        this->refType = "";
     }
 
     // Extraire ID client navigateur
@@ -385,12 +411,12 @@ Requete::Requete(string s)
         this->client = client;
         s = m[2];
     }
-    else{
+    else
+    {
         cout << "Warning : client non trouvé" << endl;
-        this->client = "";               
+        this->client = "";
     }
 } //----- Fin de Requete
-
 
 Requete::~Requete()
 // Algorithme :

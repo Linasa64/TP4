@@ -27,7 +27,6 @@ using namespace std;
 
 //----------------------------------------------------- Méthodes publiques
 
-
 void GestionFlux::LectureFichier()
 // Algorithme :
 //
@@ -70,10 +69,10 @@ GestionFlux::GestionFlux(string nomFic)
     fic.open(nomFic, ios_base::in);
     if (!fic)
     {
-        cerr << "____ FICHIER INEXISTANT ____"  << endl;
-        exit (EXIT_FAILURE);
-    } 
-    if(fic.get() != EOF)
+        cerr << "____ FICHIER INEXISTANT ____" << endl;
+        exit(EXIT_FAILURE);
+    }
+    if (fic.get() != EOF)
         LectureFichier();
     else
         cerr << "Fichier vide" << endl;
