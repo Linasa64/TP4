@@ -105,7 +105,7 @@ int main(int argc, char const *argv[])
       for (Requete *rq : l)
       {
          //On enlève les codes d'erreur HTTP 4xx et 5xx
-         if(rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5')
+         if((rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5') && rq->GetCible().compare("")!=0)
             h->AjoutRequete(rq);
       }
    }
@@ -141,8 +141,8 @@ void ajoutOptionE(const list<Requete *> l, Historique *h)
    {
       if (extension->find(rq->GetCibleType()) == extension->end())
       {
-         //On enlève les codes d'erreur HTTP 4xx et 5xx
-         if(rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5')
+         //On enlève les codes d'erreur HTTP 4xx et 5xx et la cible doit exister
+         if((rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5') && rq->GetCible().compare("")!=0)
             h->AjoutRequete(rq);
       }
    }
@@ -156,7 +156,7 @@ void ajoutOptionT(const list<Requete *> l, Historique *h, int heure)
       if (stoi(rq->GetHeure()) == heure)
       {
          //On enlève les codes d'erreur HTTP 4xx et 5xx
-         if(rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5')
+         if((rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5') && rq->GetCible().compare("")!=0)
             h->AjoutRequete(rq);
       }
    }
@@ -178,7 +178,7 @@ void ajoutOptionET(const list<Requete *> l, Historique *h, int heure)
       if (extension->find(rq->GetCibleType()) == extension->end() && stoi(rq->GetHeure()) == heure)
       {
          //On enlève les codes d'erreur HTTP 4xx et 5xx
-         if(rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5')
+         if((rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5') && rq->GetCible().compare("")!=0)
             h->AjoutRequete(rq);
       }
    }
