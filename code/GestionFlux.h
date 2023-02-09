@@ -35,19 +35,24 @@ class GestionFlux
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
+
+    void LectureFichier();
+    // Mode d'emploi : Remplie une liste de requête à partir d'un flux en attribut
+    //  
+    // Contrat : 
+    //
+
+    const list<Requete *> GetlistRq() const;
+    // Mode d'emploi : Renvoi la liste de requête formée
     //
     // Contrat :
     //
-    list<Requete *> LectureFichier();
-    const list<Requete *> GetlistRq() const;
 
     //------------------------------------------------- Surcharge d'opérateurs
 
     //-------------------------------------------- Constructeurs - destructeur
     GestionFlux(string nomFic);
-    // Mode d'emploi :
+    // Mode d'emploi : En paramètre le nom du fichier à lire
     //
     // Contrat :
     //

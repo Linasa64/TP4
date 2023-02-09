@@ -18,8 +18,8 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Historique>
-//
-//
+// Contient toutes les requêtes voulues, en fait un top10 et trie les requêtes selon
+// la cible et les referer associés et selon le nombre de hit
 //------------------------------------------------------------------------
 
 class Historique
@@ -28,15 +28,30 @@ class Historique
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
+
+    void Top10();
     // Mode d'emploi :
     //
     // Contrat :
     //
-    void Top10();
+
     void AjoutRequete(Requete *rq);
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+
     map<string, pair<int, map<string, int>>> GetMapComplete();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
+    
     map<string, int> GetMapClesCible();
+    // Mode d'emploi :
+    //
+    // Contrat :
+    //
 
     //------------------------------------------------- Surcharge d'opérateurs
 

@@ -23,12 +23,10 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Historique::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
+
 void Historique::Top10()
+// Algorithme : 
+//
 {
     for (auto itr = mapComplete.begin(); itr != mapComplete.end(); ++itr)
     {
@@ -44,9 +42,11 @@ void Historique::Top10()
             break;
         }
     }
-}
+} //----- Fin de Méthode
 
 void Historique::AjoutRequete(Requete *rq)
+// Algorithme :
+//
 {
     int changed = 0;
     if (mapClesCible.find(rq->GetCible()) == mapClesCible.end())
@@ -91,17 +91,21 @@ void Historique::AjoutRequete(Requete *rq)
     {
         changed = 1;
     }
-}
+} //----- Fin de Méthode
 
 map<string, pair<int, map<string, int>>> Historique::GetMapComplete()
+// Algorithme : 
+//
 {
     return mapComplete;
-}
+} //----- Fin de Méthode
 
 map<string, int> Historique::GetMapClesCible()
+// Algorithme :
+//
 {
     return mapClesCible;
-}
+} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -123,7 +127,6 @@ Historique::~Historique()
 #ifdef MAP
     cout << "Appel au destructeur de <Historique>" << endl;
 #endif
-
 } //----- Fin de ~Historique
 
 //------------------------------------------------------------------ PRIVE

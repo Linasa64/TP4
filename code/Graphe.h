@@ -18,7 +18,7 @@
 
 //------------------------------------------------------------------------
 // Rôle de la classe <Graphe>
-//
+// Crée le .dot des requêtes et l'image du graphe
 //
 //------------------------------------------------------------------------
 
@@ -37,14 +37,9 @@ public:
     //------------------------------------------------- Surcharge d'opérateurs
 
     //-------------------------------------------- Constructeurs - destructeur
-    Graphe(const Graphe &unGraphe);
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
     Graphe(map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFicDot);
-    // Mode d'emploi :
+    // Mode d'emploi : 
     //
     // Contrat :
     //

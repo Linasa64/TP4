@@ -26,16 +26,12 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type GestionFlux::Méthode ( liste des paramètres )
+
+
+void GestionFlux::LectureFichier()
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
-
-list<Requete *> GestionFlux::LectureFichier()
 {
-
-    // Lecture du fichier
     string line;
 
     while (getline(fic, line))
@@ -43,16 +39,17 @@ list<Requete *> GestionFlux::LectureFichier()
         string l = line;
         Requete *rq = new Requete(l);
         listRq.push_back(rq);
-        // cout << listRq.size() << endl;
     }
-    // listRq.back().printRequete();
-    return listRq;
 }
+//----- Fin de Méthode
 
 const list<Requete *> GestionFlux::GetlistRq() const
+// Algorithme :
+//
 {
     return listRq;
 }
+//----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -82,7 +79,6 @@ GestionFlux::GestionFlux(string nomFic)
         cerr << "Fichier vide" << endl;
 
     fic.close();
-    // listRq.back().printRequete();
 } //----- Fin de GestionFlux
 
 GestionFlux::~GestionFlux()

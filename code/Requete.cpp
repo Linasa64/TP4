@@ -23,13 +23,11 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Requete::Méthode ( liste des paramètres )
+
+const void Requete::printRequete() const
 // Algorithme :
 //
-//{
-//} //----- Fin de Méthode
-
-const void Requete::printRequete() const{
+{
     cout << "IP : " << ip << endl;
     cout << "logName : " << logName << endl;
     cout << "authenticatedUser : " << authenticatedUser << endl;
@@ -45,89 +43,91 @@ const void Requete::printRequete() const{
     cout << "ref : " << ref << endl;
     cout << "type du referer : " << refType << endl;
     cout << "client : " << client << endl;
-}
+} //----- Fin de Méthode
+
+// ---- Get ---- //
 
 const string Requete::GetIp() const
 {
     return ip;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetLogName() const
 {
     return logName;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetAuthenticatedUser() const
 {
     return authenticatedUser;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetDate() const
 {
     return date;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetHeure() const
 {
     return heure;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetMinute() const{
     return heure;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetSeconde() const{
     return heure;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetFuseau() const {
     return fuseau;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetType() const
 {
     return type;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetCible() const
 {
     return cible;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetCibleType() const
 {
     return cibleType;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetVersionHTTP() const
 {
     return versionHTTP;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetCodeHTTP() const
 {
     return codeHTTP;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetQtDonnees() const
 {
     return qtDonnees;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetRef() const
 {
     return ref;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetRefType() const
 {
     return refType;
-}
+} //----- Fin de Méthode
 
 const string Requete::GetClient() const
 {
     return client;
-}
+} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -142,14 +142,13 @@ Requete::Requete(string s)
 #endif
     smatch m;
 
-    // si retour chariot alors ça ne marche plus ???????
-    // solution : le faire sauter !
+    // faire sauter le retour chariot en fin de ligne pour simplifier l'utilisation des expressions régulières
     if (int(s.at(s.length() - 1)) == 13)
     {
         s.pop_back();
     }
 
-    // IP
+    // Extraire IP
     regex reIP("([^\\s]+)(.+)");
     if (regex_match(s, m, reIP))
     {
@@ -162,7 +161,7 @@ Requete::Requete(string s)
         this->ip = "";
     }
 
-    // logName
+    // Extraire logName
     regex relogName("\\s([^\\s]+)\\s(.+)");
     if (regex_match(s, m, relogName))
     {
@@ -175,7 +174,7 @@ Requete::Requete(string s)
         this->logName = "";
     }
 
-    // authenticatedUser
+    // Extraire authenticatedUser
     regex reAU("([^\\s]+)\\s(.+)");
     if(regex_match(s, m, reAU)){
         authenticatedUser = m[1];
@@ -187,7 +186,7 @@ Requete::Requete(string s)
         this->authenticatedUser = "";
     }
 
-    // date
+    // Extraire Date
     regex reDate("^\\[([^\\:]+)(.+)");
     if (regex_match(s, m, reDate))
     {
@@ -200,39 +199,42 @@ Requete::Requete(string s)
         this->date = "";
     }
 
-    //heure - minute - seconde
+    // Extraire heure - minute - seconde
     regex reHeure("([^\\s]+)(.+)");
     regex reIsole("^:([^\\:]+)(.+)");
     if(regex_match(s, m, reHeure)){
         string hms = m[1];
         s= m[2];
 
+        // Extraire Heure
         if(regex_match(hms, m, reIsole)){
             string heure = m[1];
             hms = m[2];
             this->heure = heure;
-        }
+        }else 
+            this->heure = "";
 
+        // Extraire Minute
         if(regex_match(hms, m, reIsole)){
             string minute = m[1];
             hms = m[2];
             this->minute = minute;
-            regex reIsoleSeconde("^:([^\\s]+)(.+)");
+        }else
+            this->minute = "";
 
-            if(regex_match(hms, m, reIsoleSeconde)){
-                string seconde = m[1];
-                this->seconde = seconde;
-            }
-        }
+        // Extraire Seconde
+        regex reIsoleSeconde("^:([^\\s]+)(.+)");
+        if(regex_match(hms, m, reIsoleSeconde)){
+            string seconde = m[1];
+            this->seconde = seconde;
+        }else   
+            this->seconde = "";
     }
     else{
         cout << "Warning : horaire non trouvé" << endl;
-        this->heure = "";
-        this->minute = "";
-        this->seconde = "";
     }
 
-    // fuseau
+    // Extraire Fuseau
     regex reFuseau("\\s\\+([^\\s]+)\\](.+)");
     if (regex_match(s, m, reFuseau))
     {
@@ -245,7 +247,7 @@ Requete::Requete(string s)
         this->fuseau = "";
     }
 
-    // type
+    // Extraire Type
     regex reType("\\s([^\\s]+)(.+)");
     if (regex_match(s, m, reType))
     {
@@ -260,17 +262,18 @@ Requete::Requete(string s)
     }
     
  
-    //cible
+    // Extraire Cible
     regex rePHP("(.+\\.php)(.+)");
     regex reICO("(.+\\.ico)(.+)");
     
-    regex reCibleG("\\s([^\\s]+)(HTTP.+)");
-    regex reCibleEspace("\\s(.+)(\\sHTTP.+)");
+    regex reCibleG("\\s([^\\s]+)(HTTP.+)"); // Cas où il y a 1 espace devant HTTP " HTTP"
+    regex reCibleEspace("\\s(.+)(\\sHTTP.+)"); // Cas où il y a 2 espaces devant HTTP "  HTTP"
     if (regex_match(s, m, reCibleG) || regex_match(s, m, reCibleEspace))
     {
         string cible = m[1];
         s = m[2];
-        if (regex_match(cible, m, rePHP) || regex_match(cible, m, reICO))
+        // Cas de php et ico qui ne finissent pas par l'extension
+        if (regex_match(cible, m, rePHP) || regex_match(cible, m, reICO)) 
         {
             cible = m[1];
         }
@@ -282,7 +285,7 @@ Requete::Requete(string s)
         this->cible = "";                
     }
 
-    // type de la cible
+    // Extraire Type de la cible
     regex reCibleType("(.+)(\\.[a-z]{1,4}$)");
     if (regex_match(cible, m, reCibleType))
     {
@@ -293,7 +296,7 @@ Requete::Requete(string s)
         this->cibleType = "";              
     }
 
-    // Version HTTP
+    // Extraire Version HTTP
     regex reHTTP("\\s{1,2}([^\\s]+)(.+)");
     if (regex_match(s, m, reHTTP))
     {
@@ -306,7 +309,7 @@ Requete::Requete(string s)
         this->versionHTTP = "";     
     }
 
-    // code http
+    // Extraire Code HTTP
     regex reCode("\\s([^\\s]+)(.+)");
     if (regex_match(s, m, reCode))
     {
@@ -319,7 +322,7 @@ Requete::Requete(string s)
         this->codeHTTP = "";     
     }
 
-    // taille octet réponse
+    // Extraire Taille octet réponse
     regex reTaille("\\s([^\\s]+)(.+)");
     if (regex_match(s, m, reTaille))
     {
@@ -332,11 +335,11 @@ Requete::Requete(string s)
         this->qtDonnees = "";  
     }
 
-    //referer
+    // Extraire Referer
     regex reRefG("\\s\"([^\"\\s]+)(.+)");
-    //regex reRefEspace("\\s\"(.+)(\"\\s.+)");
-    if(regex_match(s, m, reRefG) /*|| regex_match(s, m, reRefEspace)*/){
+    if(regex_match(s, m, reRefG)){
         string ref = m[1];
+        // Cas de php et ico qui ne finissent pas par l'extension
         if (regex_match(ref, m, rePHP) || regex_match(ref, m, reICO))
         {
             ref = m[1];
@@ -356,7 +359,7 @@ Requete::Requete(string s)
         this->ref = "";  
     }
 
-    // type du referer
+    // Extraire Type du referer
     regex reRefType("(.+)(\\.[a-z]{1,4}$)");
     if (regex_match(ref, m, reRefType))
     {
@@ -367,7 +370,7 @@ Requete::Requete(string s)
         this->refType = "";               
     }
 
-    // id client navigateur
+    // Extraire ID client navigateur
     regex reID("\\s\"([^\"]+)(.+)");
     if (regex_match(s, m, reID))
     {
@@ -380,6 +383,7 @@ Requete::Requete(string s)
         this->client = "";               
     }
 } //----- Fin de Requete
+
 
 Requete::~Requete()
 // Algorithme :

@@ -9,12 +9,12 @@
 //---------- Réalisation de la classe <Graphe> (fichier Graphe.cpp) ------------
 
 //---------------------------------------------------------------- INCLUDE
-#include <iostream>
-#include <fstream>
-#include <map>
+
 //-------------------------------------------------------- Include système
 using namespace std;
 #include <iostream>
+#include <fstream>
+#include <map>
 
 //------------------------------------------------------ Include personnel
 #include "Graphe.h"
@@ -25,11 +25,6 @@ using namespace std;
 //----------------------------------------------------------------- PUBLIC
 
 //----------------------------------------------------- Méthodes publiques
-// type Graphe::Méthode ( liste des paramètres )
-// Algorithme :
-//
-//{
-//} //----- Fin de Méthode
 
 //------------------------------------------------- Surcharge d'opérateurs
 
@@ -63,7 +58,6 @@ Graphe::Graphe(map<string, pair<int, map<string, int>>> &m, map<string, int> map
     string n = nomFic;
     n.erase(n.size() - 4, 4);
     system(("dot -Tpng -o " + n + ".jpg " + nomFic).c_str());
-    // system(("rm " + nomFic).c_str());
     return;
 } //----- Fin de Graphe
 

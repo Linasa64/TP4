@@ -33,13 +33,15 @@ class Requete
 public:
     //----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
+
+
+    const void printRequete() const;
+    // Mode d'emploi : Affichage des attributs de la requête
     //
     // Contrat :
     //
 
-    const void printRequete() const;
-
+    // ---- Get ---- //
     const string GetIp() const;
     const string GetLogName() const;
     const string GetAuthenticatedUser() const;
@@ -57,6 +59,7 @@ public:
     const string GetRef() const;
     const string GetRefType() const;
     const string GetClient() const;
+    // ---- --- ---- //
 
     //------------------------------------------------- Surcharge d'opérateurs
 
