@@ -68,6 +68,8 @@ Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> ma
 
     gFile << "}" << endl;
     gFile.close();
+    system("dot -Tpng -o court.png court.dot");
+    system("rm gFile.dot");
     return;
 } //----- Fin de Graphe
 

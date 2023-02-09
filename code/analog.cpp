@@ -69,6 +69,8 @@ int main(int argc, char const *argv[])
    if(arg[0] == 1){
       creerGraphe(h, nomFicDot);
    }
+   delete g;
+   delete h;
 }
 
 

@@ -86,6 +86,8 @@ GestionFlux::GestionFlux ( string nomFic )
     fic.open(nomFic, ios_base::in);
     
     LectureFichier();
+
+    fic.close();
     //listRq.back().printRequete();
 } //----- Fin de GestionFlux
 
@@ -97,7 +99,8 @@ GestionFlux::~GestionFlux ( )
 #ifdef MAP
     cout << "Appel au destructeur de <GestionFlux>" << endl;
 #endif
-    fic.close();
+
+
 } //----- Fin de ~GestionFlux
 
 
