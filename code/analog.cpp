@@ -68,6 +68,11 @@ int main(int argc, char const *argv[])
             return -1;
          }
       }
+
+      else if (argv[i][0] == '-'){
+         cerr << "Option utilisée invalide" << endl;
+         return -1;
+      }
    }
    GestionFlux *gf = new GestionFlux(nomFic);
    const list<Requete *> l = gf->GetlistRq();
