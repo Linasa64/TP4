@@ -32,58 +32,59 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
+list<Requete *> GestionFlux::LectureFichier()
+{
 
-list<Requete *> GestionFlux::LectureFichier(){
-    
-// Lecture du fichier
+    // Lecture du fichier
     string line;
 
-    while(getline(fic, line))
+    while (getline(fic, line))
     {
         string l = line;
-        Requete * rq = new Requete(l);
+        Requete *rq = new Requete(l);
         listRq.push_back(rq);
-        //cout << listRq.size() << endl;
+        // cout << listRq.size() << endl;
     }
-    //listRq.back().printRequete();
-    return listRq;            
+    // listRq.back().printRequete();
+    return listRq;
 }
 
-const list<Requete *> GestionFlux::GetlistRq() const{
+const list<Requete *> GestionFlux::GetlistRq() const
+{
     return listRq;
 }
 
 //------------------------------------------------- Surcharge d'opérateurs
 
-
 //-------------------------------------------- Constructeurs - destructeur
 
-GestionFlux::GestionFlux ( string nomFic )
+GestionFlux::GestionFlux(string nomFic)
 // Algorithme :
 //
 {
 #ifdef MAP
     cout << "Appel au constructeur de <GestionFlux>" << endl;
 #endif
-    if((nomFic.substr(nomFic.size() - 3) != "txt") && (nomFic.substr(nomFic.size() - 3) != "log")){
-        cerr << "____ EXTENSION INCONNUE ____"  << endl;
-        exit (EXIT_FAILURE);
+    if ((nomFic.substr(nomFic.size() - 3) != "txt") && (nomFic.substr(nomFic.size() - 3) != "log"))
+    {
+        cerr << "____ EXTENSION INCONNUE ____" << endl;
+        exit(EXIT_FAILURE);
     }
-    if (!fic){
-        cerr << "____ FICHIER INEXISTANT ____"  << endl;
-        exit (EXIT_FAILURE);
-    } 
-    
     fic.open(nomFic, ios_base::in);
-    
+    if (!fic)
+    {
+        cerr << "____ FICHIER INEXISTANT ____" << endl;
+        exit(EXIT_FAILURE);
+    }
+
+
     LectureFichier();
 
     fic.close();
-    //listRq.back().printRequete();
+    // listRq.back().printRequete();
 } //----- Fin de GestionFlux
 
-
-GestionFlux::~GestionFlux ( )
+GestionFlux::~GestionFlux()
 // Algorithme :
 //
 {
@@ -91,9 +92,7 @@ GestionFlux::~GestionFlux ( )
     cout << "Appel au destructeur de <GestionFlux>" << endl;
 #endif
 
-
 } //----- Fin de ~GestionFlux
-
 
 //------------------------------------------------------------------ PRIVE
 

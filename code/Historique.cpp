@@ -30,73 +30,84 @@ using namespace std;
 //} //----- Fin de Méthode
 void Historique::Top10()
 {
-    for (auto itr = mapComplete.begin(); itr != mapComplete.end(); ++itr) {
+    for (auto itr = mapComplete.begin(); itr != mapComplete.end(); ++itr)
+    {
         mpTop10.insert(pair<int, string>(itr->second.first, itr->first));
     }
     int cpt = 0;
-    for (auto itr = mpTop10.rbegin(); itr != mpTop10.rend(); ++itr) {
+    for (auto itr = mpTop10.rbegin(); itr != mpTop10.rend(); ++itr)
+    {
         cpt++;
-        cout << itr->second<< " (" << itr->first << " hits)" << endl;
-        if(cpt==10){
+        cout << itr->second << " (" << itr->first << " hits)" << endl;
+        if (cpt == 10)
+        {
             break;
         }
     }
 }
 
-void Historique::AjoutRequete(Requete * rq)
+void Historique::AjoutRequete(Requete *rq)
 {
     int changed = 0;
-    if( mapClesCible.find(rq->GetCible()) == mapClesCible.end() ){
-        mapClesCible.insert( make_pair(rq->GetCible(), mapClesCible.size()) );
+    if (mapClesCible.find(rq->GetCible()) == mapClesCible.end())
+    {
+        mapClesCible.insert(make_pair(rq->GetCible(), mapClesCible.size()));
     }
-    if( mapClesCible.find(rq->GetRef()) == mapClesCible.end() ){
-        mapClesCible.insert( make_pair(rq->GetRef(), mapClesCible.size()) );
+    if (mapClesCible.find(rq->GetRef()) == mapClesCible.end())
+    {
+        mapClesCible.insert(make_pair(rq->GetRef(), mapClesCible.size()));
     }
-    for (auto itr = mapComplete.begin(); itr != mapComplete.end(); itr++) {
-        if (itr -> first == rq->GetCible()){
-            mapComplete[itr->first].first +=1;
+    for (auto itr = mapComplete.begin(); itr != mapComplete.end(); itr++)
+    {
+        if (itr->first == rq->GetCible())
+        {
+            mapComplete[itr->first].first += 1;
             int innerChange = 0;
-            for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++) {
-                if(itr2->first == rq->GetRef()){
-                    mapComplete[itr->first].second.at(itr2->first) = itr2->second+1;
+            for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++)
+            {
+                if (itr2->first == rq->GetRef())
+                {
+                    mapComplete[itr->first].second.at(itr2->first) = itr2->second + 1;
                     innerChange = 1;
                     break;
                 }
             }
-            if(innerChange==0){
+            if (innerChange == 0)
+            {
                 mapComplete[itr->first].second.insert(make_pair(rq->GetRef(), 1));
             }
             changed = 1;
             break;
         }
-    }  
-    if(changed ==0){
+    }
+    if (changed == 0)
+    {
         map<string, int> innerMap;
         innerMap.insert(make_pair(rq->GetRef(), 1));
         pair<int, map<string, int>> innerPair = make_pair(1, innerMap);
         mapComplete.emplace(make_pair(rq->GetCible(), innerPair));
-    }else{
+    }
+    else
+    {
         changed = 1;
     }
 }
 
-map<string, pair<int, map<string, int>>> Historique::GetMapComplete ()
+map<string, pair<int, map<string, int>>> Historique::GetMapComplete()
 {
     return mapComplete;
 }
 
-map<string, int> Historique::GetMapClesCible ()
+map<string, int> Historique::GetMapClesCible()
 {
     return mapClesCible;
 }
 
-
 //------------------------------------------------- Surcharge d'opérateurs
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
-Historique::Historique ( )
+Historique::Historique()
 // Algorithme :
 //
 {
@@ -105,8 +116,7 @@ Historique::Historique ( )
 #endif
 } //----- Fin de Historique
 
-
-Historique::~Historique ( )
+Historique::~Historique()
 // Algorithme :
 //
 {
@@ -116,8 +126,6 @@ Historique::~Historique ( )
 
 } //----- Fin de ~Historique
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

@@ -31,14 +31,11 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-
 //------------------------------------------------- Surcharge d'opérateurs
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
-
-Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFic)
+Graphe::Graphe(map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFic)
 // Algorithme :
 //
 {
@@ -49,26 +46,28 @@ Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> ma
     gFile.open(nomFic);
     gFile << "digraph {" << endl;
 
-    for (auto itr = mapCles.begin(); itr != mapCles.end(); itr++) {
+    for (auto itr = mapCles.begin(); itr != mapCles.end(); itr++)
+    {
         gFile << "node" << mapCles[itr->first] << " [label=\"" << itr->first << "\"];" << endl;
     }
-    for (auto itr = m.begin(); itr != m.end(); itr++) {
-        for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++) {
-            gFile << "node" << mapCles[itr2->first] << " -> node" << mapCles[itr->first] << " [label=\"" << m[itr->first].second.at(itr2->first) << "\"];" << endl; 
+    for (auto itr = m.begin(); itr != m.end(); itr++)
+    {
+        for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++)
+        {
+            gFile << "node" << mapCles[itr2->first] << " -> node" << mapCles[itr->first] << " [label=\"" << m[itr->first].second.at(itr2->first) << "\"];" << endl;
         }
     }
 
     gFile << "}" << endl;
     gFile.close();
     string n = nomFic;
-    n.erase(n.size()-4, 4);
-    system(("dot -Tpng -o " + n + ".jpg "  + nomFic).c_str());
-    //system(("rm " + nomFic).c_str());
+    n.erase(n.size() - 4, 4);
+    system(("dot -Tpng -o " + n + ".jpg " + nomFic).c_str());
+    // system(("rm " + nomFic).c_str());
     return;
 } //----- Fin de Graphe
 
-
-Graphe::~Graphe ( )
+Graphe::~Graphe()
 // Algorithme :
 //
 {
@@ -77,8 +76,6 @@ Graphe::~Graphe ( )
 #endif
 } //----- Fin de ~Graphe
 
-
 //------------------------------------------------------------------ PRIVE
 
 //----------------------------------------------------- Méthodes protégées
-

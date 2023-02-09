@@ -7,7 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Requete> (fichier Requete.h) ----------------
-#if ! defined ( REQUETE_H )
+#if !defined(REQUETE_H)
 #define REQUETE_H
 
 //--------------------------------------------------- Interfaces utilisées
@@ -28,10 +28,10 @@ using namespace std;
 
 class Requete
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
+    //----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
@@ -56,27 +56,27 @@ public:
     const string GetRefType() const;
     const string GetClient() const;
 
-//------------------------------------------------- Surcharge d'opérateurs
+    //------------------------------------------------- Surcharge d'opérateurs
 
-//-------------------------------------------- Constructeurs - destructeur
-    Requete ( string str );
+    //-------------------------------------------- Constructeurs - destructeur
+    Requete(string str);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Requete ( );
+    virtual ~Requete();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+    //----------------------------------------------------- Méthodes protégées
 
-//----------------------------------------------------- Attributs protégés
+    //----------------------------------------------------- Attributs protégés
     string ip;
     string logName;
     string authenticatedUser;

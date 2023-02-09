@@ -7,7 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <Graphe> (fichier Graphe.h) ----------------
-#if ! defined ( Graphe_H )
+#if !defined(Graphe_H)
 #define Graphe_H
 
 //--------------------------------------------------- Interfaces utilisées
@@ -24,50 +24,46 @@
 
 class Graphe
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
+    //----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
     // Contrat :
     //
 
+    //------------------------------------------------- Surcharge d'opérateurs
 
-//------------------------------------------------- Surcharge d'opérateurs
-
-
-//-------------------------------------------- Constructeurs - destructeur
-    Graphe ( const Graphe & unGraphe );
+    //-------------------------------------------- Constructeurs - destructeur
+    Graphe(const Graphe &unGraphe);
     // Mode d'emploi (constructeur de copie) :
     //
     // Contrat :
     //
 
-    Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFicDot);
+    Graphe(map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFicDot);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~Graphe ( );
+    virtual ~Graphe();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+    //----------------------------------------------------- Méthodes protégées
 
-//----------------------------------------------------- Attributs protégés
-ofstream gFile;
-
+    //----------------------------------------------------- Attributs protégés
+    ofstream gFile;
 };
 
 //-------------------------------- Autres définitions dépendantes de <Graphe>
 
 #endif // Graphe_H
-

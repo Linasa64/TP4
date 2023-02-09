@@ -7,7 +7,7 @@
 *************************************************************************/
 
 //---------- Interface de la classe <GestionFlux> (fichier GestionFlux.h) ----------------
-#if ! defined ( GESTIONFLUX_H )
+#if !defined(GESTIONFLUX_H)
 #define GESTIONFLUX_H
 
 //--------------------------------------------------- Interfaces utilisées
@@ -31,10 +31,10 @@ using namespace std;
 
 class GestionFlux
 {
-//----------------------------------------------------------------- PUBLIC
+    //----------------------------------------------------------------- PUBLIC
 
 public:
-//----------------------------------------------------- Méthodes publiques
+    //----------------------------------------------------- Méthodes publiques
     // type Méthode ( liste des paramètres );
     // Mode d'emploi :
     //
@@ -43,36 +43,32 @@ public:
     list<Requete *> LectureFichier();
     const list<Requete *> GetlistRq() const;
 
-//------------------------------------------------- Surcharge d'opérateurs
+    //------------------------------------------------- Surcharge d'opérateurs
 
-
-//-------------------------------------------- Constructeurs - destructeur
-    GestionFlux ( string nomFic );
+    //-------------------------------------------- Constructeurs - destructeur
+    GestionFlux(string nomFic);
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-    virtual ~GestionFlux ( );
+    virtual ~GestionFlux();
     // Mode d'emploi :
     //
     // Contrat :
     //
 
-//------------------------------------------------------------------ PRIVE
+    //------------------------------------------------------------------ PRIVE
 
 protected:
-//----------------------------------------------------- Méthodes protégées
+    //----------------------------------------------------- Méthodes protégées
 
+    //----------------------------------------------------- Attributs protégés
 
-//----------------------------------------------------- Attributs protégés
-
-list<Requete *> listRq;
-ifstream fic;
-
+    list<Requete *> listRq;
+    ifstream fic;
 };
 
 //-------------------------------- Autres définitions dépendantes de <GestionFlux>
 
 #endif // GESTIONFLUX_H
-
