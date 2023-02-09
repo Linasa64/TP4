@@ -76,9 +76,10 @@ GestionFlux::GestionFlux(string nomFic)
         cerr << "____ FICHIER INEXISTANT ____"  << endl;
         exit (EXIT_FAILURE);
     } 
-    
-    
-    LectureFichier();
+    if(fic.get() != EOF)
+        LectureFichier();
+    else
+        cerr << "Fichier vide" << endl;
 
     fic.close();
     // listRq.back().printRequete();
