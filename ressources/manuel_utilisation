@@ -17,5 +17,6 @@ Commande :
 
 Résultats :
    Quelques soit les options utilisées, le top 10 des cibles les plus atteintes est donné.
-   Si il y a une erreur dans l'écriture d'une option, le fichier .log n'est pas lu
+   Si il y a une erreur dans l'écriture de l'option -t, le fichier .log n'est pas lu.
+   Si il y a une erreur dans l'ecriture du nom du fichier .dot le top 10 est réalisé mais pas le graphe.
    L'utilisation de l'option "-g" produit, en plus du .dot, l'image .png associée au graphe
