@@ -1,9 +1,0 @@
-Warning : only hits between 12h and 13h have been taken into account
-/temps/3IF1.ics (2 hits)
-/SiteWebIF/Intranet-etudiant.php (2 hits)
-/temps/FondInsa.jpg (1 hits)
-/temps/4IF3.ics (1 hits)
-/temps/3IF44.html (1 hits)
-/temps/ (1 hits)
-/notesif/ (1 hits)
-/notesif (1 hits)
