@@ -28,7 +28,8 @@ using namespace std;
 //
 //{
 //} //----- Fin de Méthode
-void Historique::Top10(){
+void Historique::Top10()
+{
     for (auto itr = mapComplete.begin(); itr != mapComplete.end(); ++itr) {
         mpTop10.insert(pair<int, string>(itr->second.first, itr->first));
     }
@@ -42,12 +43,51 @@ void Historique::Top10(){
     }
 }
 
-map<string, pair<int, map<string, int>>> Historique::GetMapComplete (){
+void Historique::AjoutRequete(Requete * rq)
+{
+    int changed = 0;
+    if( mapClesCible.find(rq->GetCible()) == mapClesCible.end() ){
+        mapClesCible.insert( make_pair(rq->GetCible(), mapClesCible.size()) );
+    }
+    if( mapClesCible.find(rq->GetRef()) == mapClesCible.end() ){
+        mapClesCible.insert( make_pair(rq->GetRef(), mapClesCible.size()) );
+    }
+    for (auto itr = mapComplete.begin(); itr != mapComplete.end(); itr++) {
+        if (itr -> first == rq->GetCible()){
+            mapComplete[itr->first].first +=1;
+            int innerChange = 0;
+            for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++) {
+                if(itr2->first == rq->GetRef()){
+                    mapComplete[itr->first].second.at(itr2->first) = itr2->second+1;
+                    innerChange = 1;
+                    break;
+                }
+            }
+            if(innerChange==0){
+                mapComplete[itr->first].second.insert(make_pair(rq->GetRef(), 1));
+            }
+            changed = 1;
+            break;
+        }
+    }  
+    if(changed ==0){
+        map<string, int> innerMap;
+        innerMap.insert(make_pair(rq->GetRef(), 1));
+        pair<int, map<string, int>> innerPair = make_pair(1, innerMap);
+        mapComplete.emplace(make_pair(rq->GetCible(), innerPair));
+    }else{
+        changed = 1;
+    }
+}
+
+map<string, pair<int, map<string, int>>> Historique::GetMapComplete ()
+{
     return mapComplete;
 }
 
-map<string, int> Historique::GetMapCles (){
-    return mapCles;
+map<string, int> Historique::GetMapClesCible ()
+{
+    return mapClesCible;
 }
 
 
@@ -55,15 +95,6 @@ map<string, int> Historique::GetMapCles (){
 
 
 //-------------------------------------------- Constructeurs - destructeur
-// Historique::Historique ( const Historique & unHistorique )
-// // Algorithme :
-// //
-// {
-// #ifdef MAP
-//     cout << "Appel au constructeur de copie de <Historique>" << endl;
-// #endif
-// } //----- Fin de Historique (constructeur de copie)
-
 
 Historique::Historique ( )
 // Algorithme :
@@ -72,51 +103,6 @@ Historique::Historique ( )
 #ifdef MAP
     cout << "Appel au constructeur de <Historique>" << endl;
 #endif
-
-    GestionFlux* gf =  new GestionFlux("../ressources/petit.log");
-    const list<Requete *> l = gf->GetlistRq();
-    delete gf;
-    
-    for(Requete * r : l){
-        int changed = 0;
-        if(mapCles.find(r->GetCible())==mapCles.end()){
-            mapCles.insert(make_pair(r->GetCible(), mapCles.size()));
-        }
-        if(mapCles.find(r->GetRef())==mapCles.end()){
-            mapCles.insert(make_pair(r->GetRef(), mapCles.size()));
-        }
-        for (auto itr = mapComplete.begin(); itr != mapComplete.end(); itr++) {
-            if (itr -> first == r->GetCible()){
-                mapComplete[itr->first].first +=1;
-                int innerChange = 0;
-                for (auto itr2 = itr->second.second.begin(); itr2 != itr->second.second.end(); itr2++) {
-                    if(itr2->first == r->GetRef()){
-                        mapComplete[itr->first].second.at(itr2->first) = itr2->second+1;
-                        innerChange = 1;
-                        break;
-                    }
-                }
-                if(innerChange==0){
-                    mapComplete[itr->first].second.insert(make_pair(r->GetRef(), 1));
-                }
-                changed = 1;
-                break;
-            }
-        }  
-        if(changed ==0){
-            map<string, int> innerMap;
-            innerMap.insert(make_pair(r->GetRef(), 1));
-            pair<int, map<string, int>> innerPair = make_pair(1, innerMap);
-            mapComplete.emplace(make_pair(r->GetCible(), innerPair));
-        }else{
-            changed = 1;
-        }
-    }
-
-    for(Requete* r : l){
-        delete r;
-    }
-
 } //----- Fin de Historique
 
 
@@ -127,9 +113,6 @@ Historique::~Historique ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Historique>" << endl;
 #endif
-
-
-
 
 } //----- Fin de ~Historique
 

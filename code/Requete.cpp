@@ -30,19 +30,21 @@ using namespace std;
 //} //----- Fin de Méthode
 
 const void Requete::printRequete() const{
-    cout << "IP : " << ip << endl;
-    cout << "logName : " << logName << endl;
-    cout << "authenticatedUser : " << authenticatedUser << endl;
-    cout << "date : " << date << endl;
-    cout << "heure : " << heure << endl;
-    cout << "fuseau : " << fuseau << endl;
-    cout << "type : " << type << endl;
+    // cout << "IP : " << ip << endl;
+    // cout << "logName : " << logName << endl;
+    // cout << "authenticatedUser : " << authenticatedUser << endl;
+    // cout << "date : " << date << endl;
+    // cout << "heure : " << heure << endl;
+    // cout << "fuseau : " << fuseau << endl;
+    // cout << "type : " << type << endl;
     cout << "cible : " << cible << endl;
-    cout << "versionHTTP : " << versionHTTP << endl;
-    cout << "codeHTTP : " << codeHTTP << endl;
-    cout << "qtDonnees : " << qtDonnees << endl;
+    cout << "type de la cible : " << cibleType << endl;
+    // cout << "versionHTTP : " << versionHTTP << endl;
+    // cout << "codeHTTP : " << codeHTTP << endl;
+    // cout << "qtDonnees : " << qtDonnees << endl;
     cout << "ref : " << ref << endl;
-    cout << "client : " << client << endl;
+    cout << "type du referer : " << refType << endl;
+    // cout << "client : " << client << endl;
 }
 
 const string Requete::GetIp() const{
@@ -77,6 +79,10 @@ const string Requete::GetCible() const{
     return cible;
 }
 
+const string Requete::GetCibleType() const{
+    return cibleType;
+}
+
 const string Requete::GetVersionHTTP() const{
     return versionHTTP;
 }
@@ -91,6 +97,10 @@ const string Requete::GetQtDonnees() const{
 
 const string Requete::GetRef() const{
     return ref;
+}
+
+const string Requete::GetRefType() const{
+    return refType;
 }
 
 const string Requete::GetClient() const{
@@ -135,6 +145,10 @@ void Requete::SetCible(string chaine){
     cible = chaine;
 }
 
+void Requete::SetCibleType(string chaine){
+    cibleType = chaine;
+}
+
 void Requete::SetVersionHTTP(string chaine){
     versionHTTP = chaine;
 }
@@ -151,6 +165,10 @@ void Requete::SetRef(string chaine){
     ref = chaine;
 }
 
+void Requete::SetRefType(string chaine){
+    refType = chaine;
+}
+
 void Requete::SetClient(string chaine){
     client = chaine;
 }
@@ -158,16 +176,6 @@ void Requete::SetClient(string chaine){
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Requete::Requete ( const Requete & unRequete )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Requete>" << endl;
-#endif
-
-} //----- Fin de Requete (constructeur de copie)
-
 
 Requete::Requete (string s)
 // Algorithme :
@@ -185,8 +193,8 @@ Requete::Requete (string s)
     }    
 
     // IP
-	regex re("([^\\s]+)(.+)");
-	if(regex_match(s, m, re)){
+	regex reIP("([^\\s]+)(.+)");
+	if(regex_match(s, m, reIP)){
         string ip = m[1];
         this->ip = ip;
         s= m[2];
@@ -196,8 +204,8 @@ Requete::Requete (string s)
     }
 
     //logName
-    regex re2("\\s([^\\s]+)\\s(.+)");
-    if(regex_match(s, m, re2)){
+    regex relogName("\\s([^\\s]+)\\s(.+)");
+    if(regex_match(s, m, relogName)){
         string logname = m[1];
         this->logName = logName;
         s= m[2];
@@ -207,8 +215,8 @@ Requete::Requete (string s)
     }
 
     //authenticatedUser
-    regex re3("([^\\s]+)\\s(.+)");
-    if(regex_match(s, m, re3)){
+    regex reAU("([^\\s]+)\\s(.+)");
+    if(regex_match(s, m, reAU)){
         string authenticatedUser = m[1];
         this->authenticatedUser = authenticatedUser;
         s= m[2];
@@ -218,8 +226,8 @@ Requete::Requete (string s)
     }
 
     //date
-    regex re4("^\\[([^\\:]+)(.+)");
-    if(regex_match(s, m, re4)){
+    regex reDate("^\\[([^\\:]+)(.+)");
+    if(regex_match(s, m, reDate)){
         string date = m[1];
         this->date = date;
         s= m[2];
@@ -229,19 +237,24 @@ Requete::Requete (string s)
     }
 
     //heure
-    regex re5("^:([^\\s]+)(.+)");
-    if(regex_match(s, m, re5)){
-        string heure = m[1];
-        this->heure = heure;
+    regex reHeure("^:([^\\s]+)(.+)");
+    regex reHeureIsole("([^\\:]+)(.+)");
+    if(regex_match(s, m, reHeure)){
+        
+        string hms = m[1];
         s= m[2];
+        if(regex_match(hms, m, reHeureIsole)){
+            string heure = m[1];
+            this->heure = heure;
+        }
     }
     else{
         cout << "heure non trouvee" << endl;
     }
 
     //fuseau
-    regex re6("\\s\\+([^\\s]+)\\](.+)");
-    if(regex_match(s, m, re6)){
+    regex reFuseau("\\s\\+([^\\s]+)\\](.+)");
+    if(regex_match(s, m, reFuseau)){
         string fuseau = m[1];
         this->fuseau = fuseau;
         s= m[2];
@@ -251,8 +264,8 @@ Requete::Requete (string s)
     }
 
     //type
-    regex re7("\\s([^\\s]+)(.+)");
-    if(regex_match(s, m, re7)){
+    regex reType("\\s([^\\s]+)(.+)");
+    if(regex_match(s, m, reType)){
         string type = m[1];
         type.erase(0,1);
         this->type = type;
@@ -263,28 +276,41 @@ Requete::Requete (string s)
     }
     
     //cible
-    regex re81("\\s(.+)(\\sHTTP.+)");
-    if(regex_match(s, m, re81)){
+    regex rePHP("(.+\\.php)(.+)");
+    regex reICO("(.+\\.ico)(.+)");
+    
+    regex reCibleG("\\s([^\\s]+)(.+)");
+    regex reCibleEspace("\\s(.+)(\\sHTTP.+)");
+    if(regex_match(s, m, reCibleG) || regex_match(s, m, reCibleEspace)){
         string cible = m[1];
-        //cible.erase(0,1);
-        this->cible = cible;
         s= m[2];
+        if(regex_match(cible, m, rePHP) || regex_match(cible, m, reICO)){
+            cible = m[1];
+        }
+
+        this->cible = cible;
+    
     }else{
-        regex re82("\\s([^\\s]+)(.+)");
-        if(regex_match(s, m, re82)){
-            string cible = m[1];
-            this->cible = cible;
-            s= m[2];
-        }
-        else{
-            cout << "cible non trouvee" << endl;                 
-        }
+        cout << "cible non trouvee" << endl;                 
+    }
+    
+
+    //type de la cible
+    regex reCibleType("(.+)(\\.[a-z]{1,4}$)");
+    if(regex_match(cible, m, reCibleType)){
+        string cibleType = m[2];
+        this->cibleType = cibleType;
+    }
+    else{
+        string cibleType = "";
+        this->cibleType = cibleType;              
     }
 
 
+
     //Version HTTP
-    regex re9("\\s{1,2}([^\\s]+)(.+)");
-    if(regex_match(s, m, re9)){
+    regex reHTTP("\\s{1,2}([^\\s]+)(.+)");
+    if(regex_match(s, m, reHTTP)){
         string version = m[1];
         this->versionHTTP = version;
         s= m[2];
@@ -294,8 +320,8 @@ Requete::Requete (string s)
     }
 
     //code http
-    regex re10("\\s([^\\s]+)(.+)");
-    if(regex_match(s, m, re10)){
+    regex reCode("\\s([^\\s]+)(.+)");
+    if(regex_match(s, m, reCode)){
         string code = m[1];
         this->codeHTTP = code;
         s= m[2];
@@ -305,8 +331,8 @@ Requete::Requete (string s)
     }
 
     //taille octet réponse
-    regex re11("\\s([^\\s]+)(.+)");
-    if(regex_match(s, m, re11)){
+    regex reTaille("\\s([^\\s]+)(.+)");
+    if(regex_match(s, m, reTaille)){
         string qtData = m[1];
         this->qtDonnees = qtData;
         s= m[2];
@@ -316,13 +342,16 @@ Requete::Requete (string s)
     }
 
     //referer
-    regex re12("\\s\"([^\\s\"]+)(.+)");
-    if(regex_match(s, m, re12)){
+    regex reRefG("\\s\"([^\\s\"]+)(.+)");
+    regex reRefEspace("\\s(.+)(\\sHTTP.+)");
+    if(regex_match(s, m, reRefG) || regex_match(s, m, reRefEspace)){
         string ref = m[1];
+        if(regex_match(ref, m, rePHP) || regex_match(ref, m, reICO)){
+            ref = m[1];
+        }
         this->ref = ref;
 
         string s = "http://intranet-if.insa-lyon.fr";
-
         string::size_type i = this->ref.find(s);
 
         if (i != string::npos)
@@ -330,15 +359,24 @@ Requete::Requete (string s)
 
         s= m[2];
         s.erase(0,1);
+    }else{
+        cout << "ref non trouve" << endl;
+    }
+
+    //type du referer
+    regex reRefType("(.+)(\\.[a-z]{1,4}$)");
+    if(regex_match(ref, m, reRefType)){
+        string refType = m[2];
+        this->refType = refType;
     }
     else{
-        cout << "ref non trouve" << endl;
-
+        string refType = "";
+        this->refType = refType;              
     }
 
     //id client navigateur
-    regex re13("\\s\"([^\"]+)(.+)");
-    if(regex_match(s, m, re13)){
+    regex reID("\\s\"([^\"]+)(.+)");
+    if(regex_match(s, m, reID)){
         string client = m[1];
         this->client = client;
         s= m[2];
@@ -346,7 +384,6 @@ Requete::Requete (string s)
     else{
         cout << "client non trouve" << endl;
     }
-
 } //----- Fin de Requete
 
 

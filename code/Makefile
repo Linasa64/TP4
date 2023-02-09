@@ -4,6 +4,7 @@ FLAGS = -c -ansi -pedantic -std=c++11 -Wall # pour débug -c -DMAP -std=c++11 -a
 
 $(EXE): $(OBJETS)
 	g++ -o $(EXE) $(OBJETS)
+	rm *.o
 
 Requete.o: Requete.cpp
 	g++ $(FLAGS) Requete.cpp
@@ -21,4 +22,4 @@ analog.o: analog.cpp
 	g++ $(FLAGS) analog.cpp
 
 clean:
-	rm $(OBJETS) $(EXE)
+	rm $(EXE)

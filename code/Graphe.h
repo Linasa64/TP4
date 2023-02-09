@@ -36,11 +36,6 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Graphe & operator = ( const Graphe & unGraphe );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
 
 //-------------------------------------------- Constructeurs - destructeur
@@ -50,7 +45,7 @@ public:
     // Contrat :
     //
 
-    Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles);
+    Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFicDot);
     // Mode d'emploi :
     //
     // Contrat :
