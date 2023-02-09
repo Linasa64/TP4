@@ -73,11 +73,11 @@ GestionFlux::GestionFlux(string nomFic)
     fic.open(nomFic, ios_base::in);
     if (!fic)
     {
-        cerr << "____ FICHIER INEXISTANT ____" << endl;
-        exit(EXIT_FAILURE);
-    }
-
-
+        cerr << "____ FICHIER INEXISTANT ____"  << endl;
+        exit (EXIT_FAILURE);
+    } 
+    
+    
     LectureFichier();
 
     fic.close();

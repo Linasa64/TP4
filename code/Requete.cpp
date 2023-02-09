@@ -29,23 +29,22 @@ using namespace std;
 //{
 //} //----- Fin de Méthode
 
-const void Requete::printRequete() const
-{
-    // cout << "IP : " << ip << endl;
-    // cout << "logName : " << logName << endl;
-    // cout << "authenticatedUser : " << authenticatedUser << endl;
-    // cout << "date : " << date << endl;
-    // cout << "heure : " << heure << endl;
-    // cout << "fuseau : " << fuseau << endl;
-    // cout << "type : " << type << endl;
+const void Requete::printRequete() const{
+    cout << "IP : " << ip << endl;
+    cout << "logName : " << logName << endl;
+    cout << "authenticatedUser : " << authenticatedUser << endl;
+    cout << "date : " << date << endl;
+    cout << "heure : " << heure << endl;
+    cout << "fuseau : " << fuseau << endl;
+    cout << "type : " << type << endl;
     cout << "cible : " << cible << endl;
     cout << "type de la cible : " << cibleType << endl;
-    // cout << "versionHTTP : " << versionHTTP << endl;
-    // cout << "codeHTTP : " << codeHTTP << endl;
-    // cout << "qtDonnees : " << qtDonnees << endl;
+    cout << "versionHTTP : " << versionHTTP << endl;
+    cout << "codeHTTP : " << codeHTTP << endl;
+    cout << "qtDonnees : " << qtDonnees << endl;
     cout << "ref : " << ref << endl;
     cout << "type du referer : " << refType << endl;
-    // cout << "client : " << client << endl;
+    cout << "client : " << client << endl;
 }
 
 const string Requete::GetIp() const
@@ -73,8 +72,15 @@ const string Requete::GetHeure() const
     return heure;
 }
 
-const string Requete::GetFuseau() const
-{
+const string Requete::GetMinute() const{
+    return heure;
+}
+
+const string Requete::GetSeconde() const{
+    return heure;
+}
+
+const string Requete::GetFuseau() const {
     return fuseau;
 }
 
@@ -151,9 +157,9 @@ Requete::Requete(string s)
         this->ip = ip;
         s = m[2];
     }
-    else
-    {
-        cout << "IP non trouvee" << endl;
+    else{
+        cerr << "Warning : IP non trouvee" << endl;
+        this->ip = "";
     }
 
     // logName
@@ -164,22 +170,21 @@ Requete::Requete(string s)
         this->logName = logName;
         s = m[2];
     }
-    else
-    {
-        cout << "logname non trouve" << endl;
+    else{
+        cerr << "Warning : logName non trouvé" << endl;
+        this->logName = "";
     }
 
     // authenticatedUser
     regex reAU("([^\\s]+)\\s(.+)");
-    if (regex_match(s, m, reAU))
-    {
-        string authenticatedUser = m[1];
+    if(regex_match(s, m, reAU)){
+        authenticatedUser = m[1];
         this->authenticatedUser = authenticatedUser;
         s = m[2];
     }
-    else
-    {
-        cout << "authenticatedUser non trouve" << endl;
+    else{
+        cerr << "Warning : authenticatedUser non trouvé" << endl;
+        this->authenticatedUser = "";
     }
 
     // date
@@ -190,28 +195,41 @@ Requete::Requete(string s)
         this->date = date;
         s = m[2];
     }
-    else
-    {
-        cout << "date non trouvee" << endl;
+    else{
+        cerr << "Warning : date non trouvée" << endl;
+        this->date = "";
     }
 
-    // heure
-    regex reHeure("^:([^\\s]+)(.+)");
-    regex reHeureIsole("([^\\:]+)(.+)");
-    if (regex_match(s, m, reHeure))
-    {
-
+    //heure - minute - seconde
+    regex reHeure("([^\\s]+)(.+)");
+    regex reIsole("^:([^\\:]+)(.+)");
+    if(regex_match(s, m, reHeure)){
         string hms = m[1];
-        s = m[2];
-        if (regex_match(hms, m, reHeureIsole))
-        {
+        s= m[2];
+
+        if(regex_match(hms, m, reIsole)){
             string heure = m[1];
+            hms = m[2];
             this->heure = heure;
         }
+
+        if(regex_match(hms, m, reIsole)){
+            string minute = m[1];
+            hms = m[2];
+            this->minute = minute;
+            regex reIsoleSeconde("^:([^\\s]+)(.+)");
+
+            if(regex_match(hms, m, reIsoleSeconde)){
+                string seconde = m[1];
+                this->seconde = seconde;
+            }
+        }
     }
-    else
-    {
-        cout << "heure non trouvee" << endl;
+    else{
+        cerr << "Warning : horaire non trouvé" << endl;
+        this->heure = "";
+        this->minute = "";
+        this->seconde = "";
     }
 
     // fuseau
@@ -222,9 +240,9 @@ Requete::Requete(string s)
         this->fuseau = fuseau;
         s = m[2];
     }
-    else
-    {
-        cout << "fuseau non trouve" << endl;
+    else{
+        cerr << "Warning : fuseau non trouvé" << endl;
+        this->fuseau = "";
     }
 
     // type
@@ -236,16 +254,17 @@ Requete::Requete(string s)
         this->type = type;
         s = m[2];
     }
-    else
-    {
-        cout << "type non trouve" << endl;
+    else{
+        cerr << "Warning : type non trouvé" << endl;
+        this->type = "";
     }
-
-    // cible
+    
+ 
+    //cible
     regex rePHP("(.+\\.php)(.+)");
     regex reICO("(.+\\.ico)(.+)");
-
-    regex reCibleG("\\s([^\\s]+)(.+)");
+    
+    regex reCibleG("\\s([^\\s]+)(HTTP.+)");
     regex reCibleEspace("\\s(.+)(\\sHTTP.+)");
     if (regex_match(s, m, reCibleG) || regex_match(s, m, reCibleEspace))
     {
@@ -257,6 +276,10 @@ Requete::Requete(string s)
         }
 
         this->cible = cible;
+    
+    }else{
+        cerr << "Warning : cible non trouvée" << endl;
+        this->cible = "";                
     }
     else
     {
@@ -270,10 +293,8 @@ Requete::Requete(string s)
         string cibleType = m[2];
         this->cibleType = cibleType;
     }
-    else
-    {
-        string cibleType = "";
-        this->cibleType = cibleType;
+    else{
+        this->cibleType = "";              
     }
 
     // Version HTTP
@@ -284,9 +305,9 @@ Requete::Requete(string s)
         this->versionHTTP = version;
         s = m[2];
     }
-    else
-    {
-        cout << "version http non trouvee" << endl;
+    else{
+        cerr << "Warning : version http non trouvée" << endl;
+        this->versionHTTP = "";     
     }
 
     // code http
@@ -297,9 +318,9 @@ Requete::Requete(string s)
         this->codeHTTP = code;
         s = m[2];
     }
-    else
-    {
-        cout << "code http non trouve" << endl;
+    else{
+        cerr << "Warning : code http non trouvé" << endl;
+        this->codeHTTP = "";     
     }
 
     // taille octet réponse
@@ -310,16 +331,15 @@ Requete::Requete(string s)
         this->qtDonnees = qtData;
         s = m[2];
     }
-    else
-    {
-        cout << "qt donnees http non trouvee" << endl;
+    else{
+        cerr << "Warning : quantité de données http non trouvée" << endl;
+        this->qtDonnees = "";  
     }
 
-    // referer
-    regex reRefG("\\s\"([^\\s\"]+)(.+)");
-    regex reRefEspace("\\s(.+)(\\sHTTP.+)");
-    if (regex_match(s, m, reRefG) || regex_match(s, m, reRefEspace))
-    {
+    //referer
+    regex reRefG("\\s\"([^\"\\s]+)(.+)");
+    //regex reRefEspace("\\s\"(.+)(\"\\s.+)");
+    if(regex_match(s, m, reRefG) /*|| regex_match(s, m, reRefEspace)*/){
         string ref = m[1];
         if (regex_match(ref, m, rePHP) || regex_match(ref, m, reICO))
         {
@@ -333,12 +353,11 @@ Requete::Requete(string s)
         if (i != string::npos)
             this->ref.erase(i, s.length());
 
-        s = m[2];
-        s.erase(0, 1);
-    }
-    else
-    {
-        cout << "ref non trouve" << endl;
+        s= m[2];
+        s.erase(0,1);
+    }else{
+        cerr << "Warning : referer non trouvé" << endl;
+        this->ref = "";  
     }
 
     // type du referer
@@ -348,10 +367,8 @@ Requete::Requete(string s)
         string refType = m[2];
         this->refType = refType;
     }
-    else
-    {
-        string refType = "";
-        this->refType = refType;
+    else{
+        this->refType = "";               
     }
 
     // id client navigateur
@@ -362,9 +379,9 @@ Requete::Requete(string s)
         this->client = client;
         s = m[2];
     }
-    else
-    {
-        cout << "client non trouve" << endl;
+    else{
+        cerr << "Warning : client non trouvé" << endl;
+        this->client = "";               
     }
 } //----- Fin de Requete
 

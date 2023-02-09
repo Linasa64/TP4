@@ -47,6 +47,8 @@ public:
     const string GetType() const;
     const string GetDate() const;
     const string GetHeure() const;
+    const string GetMinute() const;
+    const string GetSeconde() const;
     const string GetCible() const;
     const string GetCibleType() const;
     const string GetVersionHTTP() const;
@@ -82,6 +84,8 @@ protected:
     string authenticatedUser;
     string date;
     string heure;
+    string minute;
+    string seconde;
     string fuseau;
     string type;
     string cible;
