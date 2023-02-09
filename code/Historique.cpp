@@ -114,7 +114,6 @@ Historique::~Historique ( )
     cout << "Appel au destructeur de <Historique>" << endl;
 #endif
 
-
 } //----- Fin de ~Historique
 
 
