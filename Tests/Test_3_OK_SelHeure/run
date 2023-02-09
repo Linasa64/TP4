@@ -1,1 +1,1 @@
-./../../code/analog -h 12 test3.log
+./../../code/analog -t 12 test3.log
