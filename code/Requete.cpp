@@ -157,7 +157,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cout << "Warning : IP non trouvee" << endl;
+        cout << "Warning : IP non trouvée" << endl;
         this->ip = "";
     }
 

@@ -1,0 +1,21 @@
+Comment bien utiliser l'application ?
+
+Execution :
+   L'exécutable s'appelle "analog"
+   les options possibles sont :
+      "-e", permet de ne pas prendre en compte les cibles et referer d'extension ->
+         [".css", ".js", ".png", ".jpg", ".svg", ".jpeg", ".gif", ".ico"]
+      "-t" suivi d'un nombre compris entre 0 et 23, permet de spécifier un créneau horaire entre h et h+1.
+      "-g" suivi du nom du fichier .dot dans lequel sera mis le code du graphe.
+   Mettre le nom du fichier .log qui sera lu à la fin de la ligne de commande.
+
+   Il n'y a pas d'importance dans l'ordre et le nombre des options, 
+   il faut respecter le nom du fichier .dot après "-g", l'heure selectionnée après "-t" et le nom du fichier .log en fin de ligne.
+
+Commande :
+   ./analog [-e] [-t h] [-g nomFic.dot] nomFic.log
+
+Résultats :
+   Quelques soit les options utilisées, le top 10 des cibles les plus atteintes est donné.
+   Si il y a une erreur dans l'écriture d'une option, le fichier .log n'est pas lu
+   L'utilisation de l'option "-g" produit, en plus du .dot, l'image .png associée au graphe

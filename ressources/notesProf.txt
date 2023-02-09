@@ -61,7 +61,7 @@ Autre composant envoi des stats : réfléchir à quelle stl on prend. Il a besoi
 et représente le graphe
 
 	cible, ref
-Flurx -------------> Stats
+Flux -------------> Stats
 
 Hits par heure faire un tableau car nb heure connu
 Opération la plus faite est la recherche en O(n)

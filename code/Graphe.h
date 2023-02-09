@@ -28,11 +28,6 @@ class Graphe
 
 public:
     //----------------------------------------------------- Méthodes publiques
-    // type Méthode ( liste des paramètres );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
 
     //------------------------------------------------- Surcharge d'opérateurs
 

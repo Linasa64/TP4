@@ -1,0 +1,2 @@
+Ce test permet de vérifier le message d'erreur quand le fichier .dot est totalement vide,
+si il contient des espaces le fichier n'est pas considéré vide.
