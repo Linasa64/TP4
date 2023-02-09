@@ -7,6 +7,7 @@
 #include <list>
 #include <set>
 #include <map>
+#include <cstring>
 
 using namespace std;
 
@@ -34,7 +35,23 @@ int main(int argc, char const *argv[])
       }else if(!strcmp(argv[i], "-t"))
 		{
 			arg[2] = 1;
-			heure = stoi(argv[i+1]);
+         bool cdtcar1, cdtcar2;
+         cdtcar1 = strlen(argv[i+1]) < 3 && (argv[i+1][0] >= '0' && argv[i+1][0] <= '9');
+         if(strlen(argv[i+1]) == 2) 
+            cdtcar2 = (argv[i+1][1] >= '0' && argv[i+1][1] <= '9');
+         else
+            cdtcar2 = 1;
+
+         if(cdtcar1 && cdtcar2 ){
+			      heure = stoi(argv[i+1]);
+               if(heure < 0 || heure > 23){
+                  cerr << "Horaire invalide" << endl;
+                  return -1;
+               }
+         }else{
+            cerr << "Format de l'heure invalide" << endl;
+            return -1;
+         }
 		} 
    }
    GestionFlux* gf =  new GestionFlux(nomFic);
@@ -42,23 +59,20 @@ int main(int argc, char const *argv[])
    delete gf;
    Historique * h = new Historique();
       
-   if(arg[1] == 1){
-      if(heure < 0 || heure > 23){
-         cerr << "Horaire invalide" << endl;
-      }
+   if(arg[2] == 1){
       int heure2 = heure + 1;
       if( heure == 23){
          heure2 = 0;
       }
       cout << "Warning : only hits between " << heure << "h and " << heure2 << "h have been taken into account" << endl;
-      if(arg[2] == 1){
+      if(arg[1] == 1){
          ajoutOptionET(l, h, heure);
       }else{
-         ajoutOptionE(l, h);
+         ajoutOptionT(l, h, heure);
       }
    }
-   else if(arg[2] == 1){
-      ajoutOptionT(l, h, heure);
+   else if(arg[1] == 1){
+      ajoutOptionE(l, h);
    }else{
       for(Requete * rq : l){
          h->AjoutRequete(rq);
