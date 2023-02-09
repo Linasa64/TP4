@@ -158,7 +158,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : IP non trouvee" << endl;
+        cout << "Warning : IP non trouvee" << endl;
         this->ip = "";
     }
 
@@ -171,7 +171,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : logName non trouvé" << endl;
+        cout << "Warning : logName non trouvé" << endl;
         this->logName = "";
     }
 
@@ -183,7 +183,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : authenticatedUser non trouvé" << endl;
+        cout << "Warning : authenticatedUser non trouvé" << endl;
         this->authenticatedUser = "";
     }
 
@@ -196,7 +196,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : date non trouvée" << endl;
+        cout << "Warning : date non trouvée" << endl;
         this->date = "";
     }
 
@@ -226,7 +226,7 @@ Requete::Requete(string s)
         }
     }
     else{
-        cerr << "Warning : horaire non trouvé" << endl;
+        cout << "Warning : horaire non trouvé" << endl;
         this->heure = "";
         this->minute = "";
         this->seconde = "";
@@ -241,7 +241,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : fuseau non trouvé" << endl;
+        cout << "Warning : fuseau non trouvé" << endl;
         this->fuseau = "";
     }
 
@@ -255,7 +255,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : type non trouvé" << endl;
+        cout << "Warning : type non trouvé" << endl;
         this->type = "";
     }
     
@@ -278,12 +278,8 @@ Requete::Requete(string s)
         this->cible = cible;
     
     }else{
-        cerr << "Warning : cible non trouvée" << endl;
+        cout << "Warning : cible non trouvée" << endl;
         this->cible = "";                
-    }
-    else
-    {
-        cout << "cible non trouvee" << endl;
     }
 
     // type de la cible
@@ -306,7 +302,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : version http non trouvée" << endl;
+        cout << "Warning : version http non trouvée" << endl;
         this->versionHTTP = "";     
     }
 
@@ -319,7 +315,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : code http non trouvé" << endl;
+        cout << "Warning : code http non trouvé" << endl;
         this->codeHTTP = "";     
     }
 
@@ -332,7 +328,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : quantité de données http non trouvée" << endl;
+        cout << "Warning : quantité de données http non trouvée" << endl;
         this->qtDonnees = "";  
     }
 
@@ -356,7 +352,7 @@ Requete::Requete(string s)
         s= m[2];
         s.erase(0,1);
     }else{
-        cerr << "Warning : referer non trouvé" << endl;
+        cout << "Warning : referer non trouvé" << endl;
         this->ref = "";  
     }
 
@@ -380,7 +376,7 @@ Requete::Requete(string s)
         s = m[2];
     }
     else{
-        cerr << "Warning : client non trouvé" << endl;
+        cout << "Warning : client non trouvé" << endl;
         this->client = "";               
     }
 } //----- Fin de Requete

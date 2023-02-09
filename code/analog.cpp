@@ -18,6 +18,10 @@ void creerGraphe(Historique *h, string nomFicDot);
 
 int main(int argc, char const *argv[])
 {
+   if (argc == 1){
+      cerr << "Fichier non indiqué" << endl;
+      return -1;
+   }
    string nomFic = argv[argc - 1];
    // options -g -e -t
    int arg[3] = {0, 0, 0};
