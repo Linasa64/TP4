@@ -36,14 +36,17 @@ int main(int argc, char const *argv[])
          arg[0] = 1;
          nomFicDot = argv[i + 1];
       }
+
       else if (!strcmp(argv[i], "-e"))
       {
          arg[1] = 1;
       }
+
       else if (!strcmp(argv[i], "-t"))
       {
          arg[2] = 1;
          bool cdtcar1, cdtcar2;
+
          cdtcar1 = strlen(argv[i + 1]) < 3 && (argv[i + 1][0] >= '0' && argv[i + 1][0] <= '9');
          if (strlen(argv[i + 1]) == 2)
             cdtcar2 = (argv[i + 1][1] >= '0' && argv[i + 1][1] <= '9');
@@ -96,7 +99,9 @@ int main(int argc, char const *argv[])
    {
       for (Requete *rq : l)
       {
-         h->AjoutRequete(rq);
+         //On enlève les codes d'erreur HTTP 4xx et 5xx
+         if(rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5')
+            h->AjoutRequete(rq);
       }
    }
 
@@ -131,7 +136,9 @@ void ajoutOptionE(const list<Requete *> l, Historique *h)
    {
       if (extension->find(rq->GetCibleType()) == extension->end())
       {
-         h->AjoutRequete(rq);
+         //On enlève les codes d'erreur HTTP 4xx et 5xx
+         if(rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5')
+            h->AjoutRequete(rq);
       }
    }
    // delete extension;
@@ -143,7 +150,9 @@ void ajoutOptionT(const list<Requete *> l, Historique *h, int heure)
    {
       if (stoi(rq->GetHeure()) == heure)
       {
-         h->AjoutRequete(rq);
+         //On enlève les codes d'erreur HTTP 4xx et 5xx
+         if(rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5')
+            h->AjoutRequete(rq);
       }
    }
 }
@@ -163,7 +172,9 @@ void ajoutOptionET(const list<Requete *> l, Historique *h, int heure)
    {
       if (extension->find(rq->GetCibleType()) == extension->end() && stoi(rq->GetHeure()) == heure)
       {
-         h->AjoutRequete(rq);
+         //On enlève les codes d'erreur HTTP 4xx et 5xx
+         if(rq->GetCodeHTTP()[0] != '4' && rq->GetCodeHTTP()[0] != '5')
+            h->AjoutRequete(rq);
       }
    }
 }

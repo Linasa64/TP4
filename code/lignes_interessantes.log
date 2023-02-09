@@ -1,6 +1,6 @@
 192.168.14.65 - - [02/Oct/2012:11:12:08 +0200] "GET /apple-touch-icon.png HTTP/1.1" 404 218 "-" "MobileSafari/8536.25 CFNetwork/609 Darwin/13.0.0"
 192.168.1.32 - - [09/Sep/2012:21:34:50 +0200] "GET /temps/3IF2.ics  HTTP/1.1" 200 121750 "-" "iOS/5.1.1 (9B206) dataaccessd/1.0"
 192.168.1.48 - - [09/Sep/2012:23:21:55 +0200] "GET /micromachine/download/sujet.pdf HTTP/1.1" 200 1458645 "http://www.google.fr/url?sa=t&rct=j&q=architecture+d%27un+ordinateur&source=web&cd=284&ved=0CDEQFjADOJgC&url=http%3A%2F%2Fintranet-if.insa-lyon.fr%2Fmicromachine%2Fdownload%2Fsujet.pdf&ei=bQhNUNn3IeLO0QWGoICgBg&usg=AFQjCNGVIueq_Xoou5zoRZ-blydbJI89_Q" "Mozilla/4.0 (compatible; MSIE 8.0; Windows NT 5.1; Trident/4.0; .NET CLR 1.1.4322; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; InfoPath.3; .NET4.0C; .NET CLR 2.0.50727)"
-192.168.12.191 - - [26/Sep/2012:18:39:04 +0200] "GET /stages/descriptif/THALES Hong Kong.7z HTTP/1.1" 404 222 "-" "Mozilla/4.0"
+192.168.12.191 - - [26/Sep/2012:18:39:04 +0200] "GET /stages/descriptif/THALES Hong Kong.7z HTTP/1.1" 502 222 "-" "Mozilla/4.0"
 192.168.12.192 - - [26/Sep/2012:18:40:05 +0200] "GET /stages/descriptif/ARKEMA CHINE.docx HTTP/1.1" 404 222 "-" "Mozilla/4.0"
 192.168.12.190 - - [26/Sep/2012:18:37:39 +0200] "GET /stages/descriptif/SOCIETE GENERALE - stage developpement.pdf HTTP/1.1" 404 223 "-" "Mozilla/4.0"
