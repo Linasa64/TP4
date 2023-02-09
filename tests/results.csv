@@ -1,5 +1,6 @@
 Test ID;Return code validation;Out result;StdErr result;File creation result;Global result
-Test1;2;1;2;2;1
-Test2;2;1;2;1;1
-Test3;2;1;2;2;1
-Test4;2;1;2;2;1
+Test_1_OK_SansOption;2;1;2;2;1
+Test_2_OK_GenGraphe;2;1;2;1;1
+Test_3_OK_SelHeure;2;1;2;2;1
+Test_4_OK_ExceptExtension;2;1;2;2;1
+Test_5_Err_ExtensionLog;2;1;1;2;1
