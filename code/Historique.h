@@ -11,7 +11,7 @@
 #define HISTORIQUE_H
 
 //--------------------------------------------------- Interfaces utilisées
-
+#include "Requete.h"
 //------------------------------------------------------------- Constantes
 
 //------------------------------------------------------------------ Types
@@ -33,9 +33,10 @@ public:
     //
     // Contrat :
     //
-    void Top10();
+    void Top10 ();
+    void AjoutRequete (Requete * rq);
     map<string, pair<int, map<string, int>>> GetMapComplete ();
-    map<string, int> GetMapCles();
+    map<string, int> GetMapClesCible ();
 
 
 //------------------------------------------------- Surcharge d'opérateurs
@@ -47,11 +48,6 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    // Historique ( const Historique & unHistorique );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
 
     Historique ( );
     // Mode d'emploi :
@@ -73,7 +69,8 @@ protected:
 //----------------------------------------------------- Attributs protégés
 map<string, pair<int, map<string, int>>> mapComplete;
 multimap<int, string> mpTop10;
-map<string, int> mapCles;
+map<string, int> mapClesCible;
+
 };
 
 //-------------------------------- Autres définitions dépendantes de <Historique>

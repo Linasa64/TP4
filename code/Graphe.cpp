@@ -46,7 +46,7 @@ Graphe::Graphe ( const Graphe & unGraphe )
 } //----- Fin de Graphe (constructeur de copie)
 
 
-Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles)
+Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFic)
 // Algorithme :
 //
 {
@@ -54,7 +54,7 @@ Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> ma
     cout << "Appel au constructeur de <Graphe>" << endl;
 #endif
 
-    gFile.open("gFile.dot");
+    gFile.open(nomFic);
     gFile << "digraph {" << endl;
 
     for (auto itr = mapCles.begin(); itr != mapCles.end(); itr++) {
@@ -67,6 +67,7 @@ Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> ma
     }
 
     gFile << "}" << endl;
+    gFile.close();
     return;
 } //----- Fin de Graphe
 

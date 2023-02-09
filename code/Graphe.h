@@ -50,7 +50,7 @@ public:
     // Contrat :
     //
 
-    Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles);
+    Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFicDot);
     // Mode d'emploi :
     //
     // Contrat :

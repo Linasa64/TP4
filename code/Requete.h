@@ -48,10 +48,12 @@ public:
     const string GetDate() const;
     const string GetHeure() const;
     const string GetCible() const;
+    const string GetCibleType() const;
     const string GetVersionHTTP() const;
     const string GetCodeHTTP() const;
     const string GetQtDonnees() const;
     const string GetRef() const;
+    const string GetRefType() const;
     const string GetClient() const;
 
     void SetIp(string &chaine);
@@ -62,10 +64,12 @@ public:
     void SetDate(string chaine);
     void SetHeure(string chaine);
     void SetCible(string chaine);
+    void SetCibleType(string chaine);
     void SetVersionHTTP(string chaine);
     void SetCodeHTTP(string chaine);
     void SetQtDonnees(string chaine);
     void SetRef(string chaine);
+    void SetRefType(string chaine);
     void SetClient(string chaine);
 
 
@@ -110,13 +114,13 @@ protected:
     string fuseau;
     string type;
     string cible;
+    string cibleType;
     string versionHTTP;
     string codeHTTP;
     string qtDonnees;
     string ref;
+    string refType;
     string client;
-
-
 };
 
 //-------------------------------- Autres définitions dépendantes de <Requete>
