@@ -1,1 +1,1 @@
-./../../code/analog -g result.dit test11.log
+./../../bin/analog -g result.dit test11.log

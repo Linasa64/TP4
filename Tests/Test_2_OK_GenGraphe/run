@@ -1,1 +1,1 @@
-./../../code/analog -g test.dot test2.log
+./../../bin/analog -g test.dot test2.log
