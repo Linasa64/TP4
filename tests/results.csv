@@ -1,4 +1,8 @@
 Test ID;Return code validation;Out result;StdErr result;File creation result;Global result
+Test_10_Err_NomFichierManquant;2;2;1;2;1
+Test_11_Err_NomFichierDot;2;1;1;2;1
+Test_12_err_FichierVide;2;2;1;2;1
+Test_13_OK_WarningRequete;2;1;2;2;1
 Test_1_OK_SansOptionLog;2;1;2;2;1
 Test_2_OK_GenGraphe;2;1;2;1;1
 Test_3_OK_SelHeure;2;1;2;2;1
@@ -6,5 +10,5 @@ Test_4_OK_ExceptExtension;2;1;2;2;1
 Test_5_Err_ExtensionLog;2;1;1;2;1
 Test_6_Err_HeureInvalide;2;1;1;2;1
 Test_7_Err_FormatHeureInvalide;2;1;1;2;1
-Test_8_Err_LogInexistant;2;1;0;2;0
+Test_8_Err_LogInexistant;2;1;1;2;1
 Test_9_OK_SansOptionTxt;2;1;2;2;1

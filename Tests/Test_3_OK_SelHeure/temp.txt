@@ -7,4 +7,3 @@ Warning : only hits between 12h and 13h have been taken into account
 /temps/ (1 hits)
 /notesif/ (1 hits)
 /notesif (1 hits)
-/cas/themes/insa/media/favicon.ico (1 hits)

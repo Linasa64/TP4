@@ -14,6 +14,7 @@
 using namespace std;
 
 #include <iostream>
+#include <fstream>
 
 //------------------------------------------------------ Include personnel
 #include "Requete.h"
@@ -346,7 +347,13 @@ Requete::Requete(string s)
         }
         this->ref = ref;
 
-        string s = "http://intranet-if.insa-lyon.fr";
+        //string s = "http://intranet-if.insa-lyon.fr";
+        ifstream config;
+        string s;
+        config.open("./../ressources/config");
+        getline(config, s);
+        config.close();
+
         string::size_type i = this->ref.find(s);
 
         if (i != string::npos)
