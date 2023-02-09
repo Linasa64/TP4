@@ -56,23 +56,6 @@ public:
     const string GetRefType() const;
     const string GetClient() const;
 
-    void SetIp(string &chaine);
-    void SetLogName(string chaine);
-    void SetAuthenticatedUser(string chaine);
-    void SetFuseau(string chaine);
-    void SetType(string chaine);
-    void SetDate(string chaine);
-    void SetHeure(string chaine);
-    void SetCible(string chaine);
-    void SetCibleType(string chaine);
-    void SetVersionHTTP(string chaine);
-    void SetCodeHTTP(string chaine);
-    void SetQtDonnees(string chaine);
-    void SetRef(string chaine);
-    void SetRefType(string chaine);
-    void SetClient(string chaine);
-
-
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
