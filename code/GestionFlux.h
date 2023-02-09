@@ -47,12 +47,6 @@ public:
 
 
 //-------------------------------------------- Constructeurs - destructeur
-    GestionFlux ( const GestionFlux & unGestionFlux );
-    // Mode d'emploi (constructeur de copie) :
-    //
-    // Contrat :
-    //
-
     GestionFlux ( string nomFic );
     // Mode d'emploi :
     //

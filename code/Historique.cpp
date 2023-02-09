@@ -113,10 +113,6 @@ Historique::~Historique ( )
 #ifdef MAP
     cout << "Appel au destructeur de <Historique>" << endl;
 #endif
-    // C'était dans le constructeur avant, à remettre là bas si ici ça marche pas !
-    for(Requete* r : l){
-        delete r;
-    }
 
 
 } //----- Fin de ~Historique

@@ -57,15 +57,6 @@ const list<Requete *> GestionFlux::GetlistRq() const{
 
 
 //-------------------------------------------- Constructeurs - destructeur
-GestionFlux::GestionFlux ( const GestionFlux & unGestionFlux )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <GestionFlux>" << endl;
-#endif
-} //----- Fin de GestionFlux (constructeur de copie)
-
 
 GestionFlux::GestionFlux ( string nomFic )
 // Algorithme :

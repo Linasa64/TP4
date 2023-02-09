@@ -39,7 +39,8 @@ int main(int argc, char const *argv[])
    }
    GestionFlux* gf =  new GestionFlux(nomFic);
    const list<Requete *> l = gf->GetlistRq();
-      Historique * h = new Historique();
+   delete gf;
+   Historique * h = new Historique();
       
    if(arg[1] == 1){
       if(heure < 0 || heure > 23){
@@ -69,7 +70,11 @@ int main(int argc, char const *argv[])
    if(arg[0] == 1){
       creerGraphe(h, nomFicDot);
    }
-   delete g;
+
+   for(Requete * r : l){
+      delete r;
+   }
+
    delete h;
 }
 
@@ -90,6 +95,7 @@ void ajoutOptionE( const list<Requete *> l , Historique * h){
          h->AjoutRequete(rq);
       }
    }
+   //delete extension;
 }
    
 void ajoutOptionT( const list<Requete *> l , Historique * h, int heure){
@@ -126,4 +132,5 @@ void creerGraphe(Historique * h, string nomFicDot){
    map<string, int> mapCles = h->GetMapClesCible();
    Graphe *g = new Graphe(m, mapCles, nomFicDot);
    cout << "Dot-file " << nomFicDot << " generated" << endl;
+   delete g;
 }

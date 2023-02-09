@@ -48,7 +48,7 @@ fi
 # stdout has been specified
 if [ -r "std.out" ]
 then 
-  sRun="$sRun >temp.txt"
+  sRun="$sRun > temp.txt"
 fi
 
 # stderr has been specified
@@ -94,7 +94,7 @@ then
     resultGlobal=0
   fi
   # clean temporary out file
-  rm temp.txt
+  #rm temp.txt
 fi
 
 # compare stderr if concerned

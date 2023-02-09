@@ -36,14 +36,6 @@ using namespace std;
 
 
 //-------------------------------------------- Constructeurs - destructeur
-Graphe::Graphe ( const Graphe & unGraphe )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Graphe>" << endl;
-#endif
-} //----- Fin de Graphe (constructeur de copie)
 
 
 Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> mapCles, string nomFic)
@@ -68,8 +60,10 @@ Graphe::Graphe (map<string, pair<int, map<string, int>>> &m, map<string, int> ma
 
     gFile << "}" << endl;
     gFile.close();
-    system("dot -Tpng -o court.png court.dot");
-    system("rm gFile.dot");
+    string n = nomFic;
+    n.erase(n.size()-4, 4);
+    system(("dot -Tpng -o " + n + ".jpg "  + nomFic).c_str());
+    //system(("rm " + nomFic).c_str());
     return;
 } //----- Fin de Graphe
 

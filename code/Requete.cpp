@@ -176,16 +176,6 @@ void Requete::SetClient(string chaine){
 //------------------------------------------------- Surcharge d'opérateurs
 
 //-------------------------------------------- Constructeurs - destructeur
-Requete::Requete ( const Requete & unRequete )
-// Algorithme :
-//
-{
-#ifdef MAP
-    cout << "Appel au constructeur de copie de <Requete>" << endl;
-#endif
-
-} //----- Fin de Requete (constructeur de copie)
-
 
 Requete::Requete (string s)
 // Algorithme :

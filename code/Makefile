@@ -22,4 +22,4 @@ analog.o: analog.cpp
 	g++ $(FLAGS) analog.cpp
 
 clean:
-	rm $(OBJETS) $(EXE)
+	rm $(EXE)

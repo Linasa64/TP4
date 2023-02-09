@@ -40,12 +40,6 @@ public:
 
 
 //------------------------------------------------- Surcharge d'opérateurs
-    Historique & operator = ( const Historique & unHistorique );
-    // Mode d'emploi :
-    //
-    // Contrat :
-    //
-
 
 //-------------------------------------------- Constructeurs - destructeur
 
